@@ -11,7 +11,7 @@ body {
   background-image:
     linear-gradient(rgba(232,200,74,0.15) 1px, transparent 1px),
     linear-gradient(90deg, rgba(232,200,74,0.15) 1px, transparent 1px);
-  background-size: 40px 40px;
+  background-size: 20px 20px;
   font-family: 'Barlow Condensed', sans-serif;
   min-height: 100vh;
   position: relative;
@@ -111,6 +111,7 @@ main {
     width: 25%;
     text-align: center;
 }
+
 
 .card span:first-child {
   font-weight: 700;
