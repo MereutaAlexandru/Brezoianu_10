@@ -51,7 +51,7 @@ header {
 main {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 32px;
   padding: 24px 20px 60px;
   max-width: 480px;
   margin: 0 auto;
@@ -59,22 +59,29 @@ main {
   z-index: 20;
 }
 
-.titlu-mare {
-    font-size: 3rem;
-    font-weight: 900;
-    letter-spacing: 0.05rem;
-    color: #E8C84A;
-    line-height: 1;
-}
-
-.titlu-mic {
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: 0.3em;
+.titlu-principal {
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
   color: #E8C84A;
   line-height: 1;
+  white-space: nowrap;
 }
 
+.linie {
+  width: 100%;
+  height: 1px;
+  background-color: #E8C84A;
+  opacity: 0.2;
+  margin: 12px 0;
+}
+
+.subtitlu {
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  color: #E8C84A;
+  opacity: 0.5;
+}
 
 .card {
   background-color: #E8C84A;
