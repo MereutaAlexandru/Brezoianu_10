@@ -23,8 +23,9 @@ header {
 .tabs {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     margin-top: 16px;
+    flex-wrap: wrap;
 }
 
 .tab-btn {
@@ -40,6 +41,7 @@ header {
     font-weight: 700;
     letter-spacing: 0.2em;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .tab-btn.activ {

@@ -29,7 +29,8 @@ header {
 
 .tabs-butoane {
     display: flex;
-    gap: 12px;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 .tabs-label {
@@ -38,6 +39,8 @@ header {
     color: #E8C84A;
     opacity: 1;
     font-weight: 700;
+    white-space: nowrap;
+    align-self: flex-end;
 }
 
 

@@ -39,6 +39,8 @@ header {
     color: #E8C84A;
     opacity: 1;
     font-weight: 700;
+    white-space: nowrap;
+    align-self: flex-end;
 }
 
 
