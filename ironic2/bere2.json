@@ -1,0 +1,8 @@
+[
+  { "nume": "Blonde Ale", "pret": 14, "tip": "Blondă", "berarie": "Zaganu" },
+  { "nume": "Hop Junkie", "pret": 16, "tip": "IPA", "berarie": "Hop Hooligans" },
+  { "nume": "Dark Matter", "pret": 15, "tip": "Stout", "berarie": "Sikaru" },
+  { "nume": "Wheat King", "pret": 13, "tip": "Weiss", "berarie": "Ground Breaker" },
+  { "nume": "Red Session", "pret": 14, "tip": "Red Ale", "berarie": "Hophead" },
+  { "nume": "Crispy Lager", "pret": 12, "tip": "Lager", "berarie": "Zaganu" }
+]
