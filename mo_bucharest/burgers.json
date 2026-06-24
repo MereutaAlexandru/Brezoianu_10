@@ -1,0 +1,47 @@
+[
+  {
+    "nume": "Baxi", "gramaj": "220g", "pret": 49,
+    "ingrediente": "potato bun, fresh local beef, double cheddar, special mayo sauce, lettuce, pickles, red onion",
+    "alergii": "milk, egg, gluten, mustard"
+  },
+  {
+    "nume": "Italian", "gramaj": "230g", "pret": 49,
+    "ingrediente": "potato bun, fresh local beef, mozzarella, basil mayo sauce, rucola, tomato",
+    "alergii": "milk, egg, gluten"
+  },
+  {
+    "nume": "Korean", "gramaj": "230g", "pret": 49,
+    "ingrediente": "potato bun, fresh local beef, mozzarella, gochujang mayo sauce, lettuce, red onion",
+    "alergii": "milk, egg, gluten, soy, sesame"
+  },
+  {
+    "nume": "Black Truffle", "gramaj": "220g", "pret": 51,
+    "ingrediente": "potato bun, fresh local beef, smoked cheese, mayo, black truffle, grilled red onion",
+    "alergii": "milk, egg, gluten"
+  },
+  {
+    "nume": "Veggie", "gramaj": "280g", "pret": 49,
+    "ingrediente": "thyme, mozzarella, grana padano, rucola, mayo, truffle sauce",
+    "alergii": "milk, egg, gluten"
+  },
+  {
+    "nume": "Blue Magiun", "gramaj": "270g", "pret": 51,
+    "ingrediente": "",
+    "alergii": ""
+  },
+  {
+    "nume": "Romanian", "gramaj": "260g", "pret": 49,
+    "ingrediente": "potato bun, fresh local beef, smoked cheese, horseradish mustard mayo sauce, lettuce, pickles",
+    "alergii": "milk, egg, gluten, mustard"
+  },
+  {
+    "nume": "Romanian 2.0", "gramaj": "240g", "pret": 51,
+    "ingrediente": "",
+    "alergii": ""
+  },
+  {
+    "nume": "Vela aka MOFC", "gramaj": "270g", "pret": 49,
+    "ingrediente": "potato bun, Jamaican style fried chicken, cheddar, lettuce, mayo, garlic, pickles, Jamaican hot sauce",
+    "alergii": "milk, egg, gluten, mustard"
+  }
+]

@@ -1,0 +1,12 @@
+[
+  { "nume": "Espresso", "pret": "9 / 12" },
+  { "nume": "Long Black", "pret": "12" },
+  { "nume": "Batch Brew", "pret": "10 / 15" },
+  { "nume": "Ibrik", "pret": "10" },
+  { "nume": "Cortado", "pret": "12" },
+  { "nume": "Cappuccino", "pret": "15" },
+  { "nume": "Flat White", "pret": "17" },
+  { "nume": "Latte (single / double shot)", "pret": "16 / 19" },
+  { "nume": "Hot / Cold Cocoa", "pret": "9" },
+  { "nume": "Non Dairy Milk", "pret": "+3" }
+]

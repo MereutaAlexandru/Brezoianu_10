@@ -1,5 +1,5 @@
 [
-  { "nume": "Free Spirit", "pret": 11, "tip": "Lager 0.0%", "berarie": "Zaganu" },
-  { "nume": "Clean Slate", "pret": 12, "tip": "IPA 0.0%", "berarie": "Hop Hooligans" },
-  { "nume": "Wheat Free", "pret": 11, "tip": "Weiss 0.0%", "berarie": "Sikaru" }
+  { "nume": "Lasă-mă Papa la Mure", "pret": 19, "tip": "Sucusor cu Ghimbă și Mure", "berarie": "Bula" },
+  { "nume": "RoboCop", "pret": 19, "tip": "", "berarie": "Bula" },
+  { "nume": "Gingerel", "pret": 19, "tip": "Sucusor cu Ghimbir", "berarie": "Bula" }
 ]

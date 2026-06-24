@@ -23,23 +23,9 @@ header {
 .tabs {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 10px;
     margin-top: 16px;
 }
-
-.tabs-butoane {
-    display: flex;
-    gap: 12px;
-}
-
-.tabs-label {
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    color: #E8C84A;
-    opacity: 1;
-    font-weight: 700;
-}
-
 
 .tab-btn {
     -webkit-appearance: none;
@@ -48,7 +34,7 @@ header {
     color: #E8C84A;
     border: 2px solid rgba(232, 200, 74, 0.8);
     border-radius: 12px;
-    padding: 8px 24px;
+    padding: 8px 18px;
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.9rem;
     font-weight: 700;
@@ -58,14 +44,14 @@ header {
 
 .tab-btn.activ {
     background: rgba(232, 200, 74, 0.25);
-    color:  #E8C84A;
+    color: #E8C84A;
 }
 
 .linie-tabs {
     width: 100%;
     height: 2px;
     background-color: #E8C84A;
-    opacity: 1;
+    opacity: 0.8;
     margin-top: 16px;
 }
 
@@ -108,20 +94,32 @@ main {
     margin: 8px 0;
 }
 
-.produs-detalii {
-    font-size: 0.8rem;
-    letter-spacing: 0.2em;
+.produs-gramaj {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
     color: #E8C84A;
-    opacity: 0.6;
-    text-transform: uppercase;
-    font-weight: 700;
-}
-
-.produs-tip {
-    font-size: 0.8rem;
-    letter-spacing: 0.15em;
-    color: #E8C84A;
-    opacity: 0.6;
+    opacity: 0.5;
     font-weight: 400;
     font-family: 'Roboto', sans-serif;
+}
+
+.produs-ingrediente {
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    color: #E8C84A;
+    opacity: 0.7;
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.5;
+    margin-bottom: 4px;
+}
+
+.produs-alergii {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: #E8C84A;
+    opacity: 0.4;
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
 }

@@ -5,17 +5,22 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!tabs.length || !container) return;
 
     function renderProduse(produse) {
-    container.innerHTML = produse.map(function (p) {
-        return '<div class="produs">' +
-            '<div class="produs-top">' +
-'<span class="produs-nume">' + p.nume + ' <span class="produs-tip">- ' + p.tip + '</span></span>' +
-            '<span class="produs-pret">' + p.pret + ' LEI</span>' +
-            '</div>' +
-            '<div class="produs-linie"></div>' +
-            '<div class="produs-detalii">' + p.berarie + '</div>' +
-            '</div>';
-    }).join('');
-}
+        container.innerHTML = produse.map(function (p) {
+            var berarieName = p.berarie === 'Ironic' ? ';)' : p.berarie;
+            var parts = [];
+            if (p.tip) parts.push(p.tip);
+            if (p.alcool) parts.push(p.alcool + '%');
+            var detalii = parts.join(' · ');
+            return '<div class="produs">' +
+                '<div class="produs-top">' +
+                '<span class="produs-nume">' + p.nume + (berarieName ? ' <span class="produs-tip">- ' + berarieName + '</span>' : '') + '</span>' +
+                '<span class="produs-pret">' + p.pret + ' LEI</span>' +
+                '</div>' +
+                '<div class="produs-linie"></div>' +
+                '<div class="produs-detalii">' + detalii + '</div>' +
+                '</div>';
+        }).join('');
+    }
 
     function loadTab(btn) {
         tabs.forEach(function (t) { t.classList.remove('activ'); });

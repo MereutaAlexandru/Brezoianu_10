@@ -6,18 +6,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function renderProduse(produse) {
         container.innerHTML = produse.map(function (p) {
-            var berarieName = p.berarie === 'Ironic' ? ';)' : p.berarie;
-            var parts = [];
-            if (p.tip) parts.push(p.tip);
-            if (p.alcool) parts.push(p.alcool + '%');
-            var detalii = parts.join(' · ');
             return '<div class="produs">' +
                 '<div class="produs-top">' +
-                '<span class="produs-nume">' + p.nume + (berarieName ? ' <span class="produs-tip">- ' + berarieName + '</span>' : '') + '</span>' +
+                '<span class="produs-nume">' + p.nume + '</span>' +
                 '<span class="produs-pret">' + p.pret + ' LEI</span>' +
                 '</div>' +
                 '<div class="produs-linie"></div>' +
-                '<div class="produs-detalii">' + detalii + '</div>' +
                 '</div>';
         }).join('');
     }
