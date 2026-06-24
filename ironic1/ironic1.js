@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     container.innerHTML = produse.map(function (p) {
         return '<div class="produs">' +
             '<div class="produs-top">' +
-            '<span class="produs-nume">' + p.nume + ' · ' + p.tip + '</span>' +
+'<span class="produs-nume">' + p.nume + ' <span class="produs-tip">- ' + p.tip + '</span></span>' +
             '<span class="produs-pret">' + p.pret + ' LEI</span>' +
             '</div>' +
             '<div class="produs-linie"></div>' +

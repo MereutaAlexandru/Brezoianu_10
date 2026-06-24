@@ -1,0 +1,115 @@
+.inapoi {
+    display: block;
+    width: fit-content;
+    color: #E8C84A;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    border: 2px solid rgba(232, 200, 74, 0.8);
+    border-radius: 12px;
+    padding: 8px 16px;
+    margin-bottom: 16px;
+    font-weight: 700;
+}
+
+.tabs {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+}
+
+.tabs-butoane {
+    display: flex;
+    gap: 12px;
+}
+
+.tabs-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: #E8C84A;
+    opacity: 1;
+    font-weight: 700;
+}
+
+
+.tab-btn {
+    background: transparent;
+    color: #E8C84A;
+    border: 2px solid rgba(232, 200, 74, 0.8);
+    border-radius: 12px;
+    padding: 8px 24px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    cursor: pointer;
+}
+
+.tab-btn.activ {
+    background: rgba(232, 200, 74, 0.25);
+    color:  #E8C84A;
+}
+
+.linie-tabs {
+    width: 100%;
+    height: 2px;
+    background-color: #E8C84A;
+    opacity: 1;
+    margin-top: 16px;
+}
+
+main {
+    gap: 0;
+    padding-top: 8px;
+}
+
+.produs {
+    padding: 16px 0;
+}
+
+.produs-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+}
+
+.produs-nume {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #E8C84A;
+    letter-spacing: 0.05em;
+}
+
+.produs-pret {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #E8C84A;
+    white-space: nowrap;
+}
+
+.produs-linie {
+    width: 100%;
+    height: 1px;
+    background-color: #E8C84A;
+    opacity: 0.8;
+    margin: 8px 0;
+}
+
+.produs-detalii {
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: #E8C84A;
+    opacity: 0.6;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.produs-tip {
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    color: #E8C84A;
+    opacity: 0.6;
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+}
