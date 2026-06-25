@@ -67,7 +67,6 @@
             text-align: center;
             margin-top: 12px;
             min-height: 20px;
-            letter-spacing: 0.05em;
         }
 
         /* ─── ADMIN ─── */
@@ -109,7 +108,7 @@
             flex: 1;
             min-width: 140px;
         }
-        .selector-group label {
+        .selector-group > label {
             font-size: 0.7rem;
             letter-spacing: 0.2em;
             opacity: 0.5;
@@ -136,11 +135,7 @@
             justify-content: space-between;
             padding: 14px 20px 8px;
         }
-        .produse-header h2 {
-            font-size: 1rem;
-            letter-spacing: 0.15em;
-            opacity: 0.7;
-        }
+        .produse-header h2 { font-size: 1rem; letter-spacing: 0.15em; opacity: 0.7; }
         .btn-adauga {
             background: rgba(232,200,74,0.15);
             border: 2px solid #E8C84A;
@@ -155,63 +150,116 @@
             -webkit-appearance: none;
         }
 
-        #lista-produse { padding: 0 20px 20px; }
+        #lista-produse { padding: 0 20px; }
+        #lista-activa { margin-bottom: 4px; }
 
+        .ascunse-header {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            opacity: 0.4;
+            padding: 16px 0 8px;
+            border-top: 1px solid rgba(232,200,74,0.2);
+            margin-top: 8px;
+        }
+
+        /* ─── PRODUCT CARD ─── */
         .produs-admin {
             border: 1px solid rgba(232,200,74,0.2);
             border-radius: 12px;
-            padding: 12px 14px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: stretch;
+            overflow: hidden;
+        }
+        .produs-admin.e-sold-out { border-color: rgba(232,200,74,0.5); }
+        .drag-ghost { opacity: 0.35; background: rgba(232,200,74,0.06); }
+
+        /* Drag handle — centered on full card height */
+        .drag-handle {
+            cursor: grab;
+            font-size: 1.1rem;
+            letter-spacing: -2px;
+            opacity: 0.25;
+            padding: 0 10px;
+            touch-action: none;
+            flex-shrink: 0;
             display: flex;
             align-items: center;
-            gap: 10px;
+            border-right: 1px solid rgba(232,200,74,0.1);
         }
+        .drag-handle:active { cursor: grabbing; opacity: 0.6; }
+
+        /* Card body */
+        .produs-admin-body {
+            flex: 1;
+            min-width: 0;
+            padding: 10px 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         .produs-admin-info { flex: 1; min-width: 0; }
         .produs-admin-nume {
-            font-size: 1rem;
+            font-size: 1.15rem;
             font-weight: 700;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.03em;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
         .produs-admin-detalii {
-            font-size: 0.75rem;
-            opacity: 0.5;
-            letter-spacing: 0.1em;
+            font-size: 0.85rem;
+            opacity: 0.65;
+            letter-spacing: 0.08em;
             margin-top: 2px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        .produs-admin-pret {
-            font-size: 0.95rem;
-            font-weight: 700;
-            white-space: nowrap;
-            opacity: 0.9;
+
+        /* Action buttons — single row on the right */
+        .produs-admin-actiuni {
+            display: flex;
+            flex-direction: row;
+            gap: 4px;
+            flex-shrink: 0;
         }
-        .btn-icon {
+        .btn-actiune {
             background: transparent;
-            border: none;
-            font-size: 1rem;
+            border: 1px solid rgba(232,200,74,0.25);
+            border-radius: 8px;
+            color: #E8C84A;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            padding: 7px 16px;
             cursor: pointer;
-            padding: 4px;
-            opacity: 0.7;
-            line-height: 1;
+            -webkit-appearance: none;
+            opacity: 0.8;
         }
-        .btn-icon:active { opacity: 1; }
+        .btn-actiune.activ {
+            background: rgba(232,200,74,0.18);
+            border-color: #E8C84A;
+            opacity: 1;
+        }
+        .btn-actiune.btn-sterge {
+            color: rgba(255,110,110,0.85);
+            border-color: rgba(255,110,110,0.25);
+        }
 
         #mesaj-status {
-            padding: 6px 20px 14px;
+            padding: 4px 20px 16px;
             font-size: 0.9rem;
-            min-height: 32px;
+            min-height: 28px;
             color: #90EE90;
             letter-spacing: 0.1em;
         }
-
         .spinner {
-            padding: 32px 20px;
-            opacity: 0.4;
+            padding: 28px 0;
+            opacity: 0.35;
             letter-spacing: 0.2em;
             font-size: 0.9rem;
         }
@@ -245,7 +293,6 @@
             padding: 4px 8px;
             opacity: 0.7;
         }
-        .btn-close:active { opacity: 1; }
 
         .form-field { margin-bottom: 14px; }
         .form-field label {
@@ -273,11 +320,7 @@
         .form-field textarea:focus { border-color: #E8C84A; }
         .form-field textarea { min-height: 70px; resize: vertical; }
 
-        .form-actions {
-            display: flex;
-            gap: 12px;
-            margin-top: 8px;
-        }
+        .form-actions { display: flex; gap: 12px; margin-top: 8px; }
         .btn-salveaza {
             flex: 1;
             background: rgba(232,200,74,0.2);
@@ -350,7 +393,14 @@
         <button class="btn-adauga" id="btn-adauga">+ ADAUGĂ</button>
     </div>
 
-    <div id="lista-produse"><div class="spinner">SE ÎNCARCĂ...</div></div>
+    <div id="lista-produse">
+        <div id="lista-activa"><div class="spinner">SE ÎNCARCĂ...</div></div>
+        <div id="sectiune-ascunse" style="display:none">
+            <div class="ascunse-header">ASCUNSE</div>
+            <div id="lista-ascunse"></div>
+        </div>
+    </div>
+
     <div id="mesaj-status"></div>
 </div>
 
@@ -367,7 +417,9 @@
     </div>
 </div>
 
-<!-- Firebase SDK (compat) -->
+<!-- SortableJS -->
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+<!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
@@ -384,46 +436,36 @@
     });
 
     var auth = firebase.auth();
-    var db = firebase.database();
+    var db   = firebase.database();
 
     var barConfig = {
-        ironic1: {
-            categorii: {
-                plecari:    { label: 'Plecări',     campuri: ['nume','pret','tip','berarie','alcool'] },
-                sosiri:     { label: 'Sosiri',      campuri: ['nume','pret','tip','berarie','alcool'] },
-                zero_alcool:{ label: 'Zero Alcool', campuri: ['nume','pret','tip','berarie','alcool'] },
-                soft_drinks:{ label: 'Soft Drinks', campuri: ['nume','pret','tip','berarie'] }
-            }
-        },
-        ironic2: {
-            categorii: {
-                bere:       { label: 'Bere',        campuri: ['nume','pret','tip','berarie','alcool'] },
-                soft_drinks:{ label: 'Soft Drinks', campuri: ['nume','pret','tip','berarie'] }
-            }
-        },
-        mo_bucharest: {
-            categorii: {
-                burgers: { label: 'Burgers', campuri: ['nume','gramaj','pret','ingrediente','alergii'] },
-                sides:   { label: 'Sides',   campuri: ['nume','gramaj','pret','ingrediente','alergii'] },
-                deserts: { label: 'Deserts', campuri: ['nume','gramaj','pret','ingrediente','alergii'] }
-            }
-        },
-        temple_of_brewzeus: {
-            categorii: {
-                cafea:        { label: 'Cafea',        campuri: ['nume','pret'] },
-                cold_coffee:  { label: 'Cold Coffee',  campuri: ['nume','pret'] },
-                alte_bauturi: { label: 'Alte Băuturi', campuri: ['nume','pret'] },
-                fresh:        { label: 'Fresh',        campuri: ['nume','pret'] }
-            }
-        },
-        paine_goala: {
-            categorii: {
-                paine:       { label: 'Pâine',       campuri: ['nume','pret','alergii'] },
-                patiserie:   { label: 'Patiserie',   campuri: ['nume','pret','alergii'] },
-                gatite:      { label: 'Gătite',      campuri: ['nume','pret','ingrediente','alergii'] },
-                sandwichuri: { label: 'Sandwichuri', campuri: ['nume','pret','ingrediente','alergii'] }
-            }
-        }
+        ironic1: { categorii: {
+            plecari:     { label: 'Plecări',     campuri: ['nume','pret','tip','berarie','alcool'] },
+            sosiri:      { label: 'Sosiri',      campuri: ['nume','pret','tip','berarie','alcool'] },
+            zero_alcool: { label: 'Zero Alcool', campuri: ['nume','pret','tip','berarie','alcool'] },
+            soft_drinks: { label: 'Soft Drinks', campuri: ['nume','pret','tip','berarie'] }
+        }},
+        ironic2: { categorii: {
+            bere:        { label: 'Bere',        campuri: ['nume','pret','tip','berarie','alcool'] },
+            soft_drinks: { label: 'Soft Drinks', campuri: ['nume','pret','tip','berarie'] }
+        }},
+        mo_bucharest: { categorii: {
+            burgers: { label: 'Burgers', campuri: ['nume','gramaj','pret','ingrediente','alergii'] },
+            sides:   { label: 'Sides',   campuri: ['nume','gramaj','pret','ingrediente','alergii'] },
+            deserts: { label: 'Deserts', campuri: ['nume','gramaj','pret','ingrediente','alergii'] }
+        }},
+        temple_of_brewzeus: { categorii: {
+            cafea:        { label: 'Cafea',        campuri: ['nume','pret'] },
+            cold_coffee:  { label: 'Cold Coffee',  campuri: ['nume','pret'] },
+            alte_bauturi: { label: 'Alte Băuturi', campuri: ['nume','pret'] },
+            fresh:        { label: 'Fresh',        campuri: ['nume','pret'] }
+        }},
+        paine_goala: { categorii: {
+            paine:       { label: 'Pâine',       campuri: ['nume','pret','alergii'] },
+            patiserie:   { label: 'Patiserie',   campuri: ['nume','pret','alergii'] },
+            gatite:      { label: 'Gătite',      campuri: ['nume','pret','ingrediente','alergii'] },
+            sandwichuri: { label: 'Sandwichuri', campuri: ['nume','pret','ingrediente','alergii'] }
+        }}
     };
 
     var campLabels = {
@@ -435,20 +477,21 @@
     var categorieCurenta = 'plecari';
     var produseCurente = {};
     var editKey = null;
+    var sortableInstance = null;
 
-    var loginScreen  = document.getElementById('login-screen');
-    var adminScreen  = document.getElementById('admin-screen');
-    var loginForm    = document.getElementById('login-form');
-    var loginEroare  = document.getElementById('login-eroare');
-    var selBar       = document.getElementById('sel-bar');
-    var selCategorie = document.getElementById('sel-categorie');
-    var listaProduse = document.getElementById('lista-produse');
-    var mesajStatus  = document.getElementById('mesaj-status');
-    var formOverlay  = document.getElementById('form-overlay');
-    var formTitlu    = document.getElementById('form-titlu');
-    var formCampuri  = document.getElementById('form-campuri');
+    var loginScreen     = document.getElementById('login-screen');
+    var adminScreen     = document.getElementById('admin-screen');
+    var listaActiva     = document.getElementById('lista-activa');
+    var listaAscunse    = document.getElementById('lista-ascunse');
+    var sectiuneAscunse = document.getElementById('sectiune-ascunse');
+    var mesajStatus     = document.getElementById('mesaj-status');
+    var formOverlay     = document.getElementById('form-overlay');
+    var formTitlu       = document.getElementById('form-titlu');
+    var formCampuri     = document.getElementById('form-campuri');
+    var selBar          = document.getElementById('sel-bar');
+    var selCategorie    = document.getElementById('sel-categorie');
 
-    // ── Auth state ──
+    // ── Auth ──
     auth.onAuthStateChanged(function (user) {
         if (user) {
             loginScreen.style.display = 'none';
@@ -460,32 +503,27 @@
         }
     });
 
-    // ── Login ──
-    loginForm.addEventListener('submit', function (e) {
+    document.getElementById('login-form').addEventListener('submit', function (e) {
         e.preventDefault();
-        loginEroare.textContent = '';
+        document.getElementById('login-eroare').textContent = '';
         auth.signInWithEmailAndPassword(
             document.getElementById('email').value,
             document.getElementById('password').value
         ).catch(function () {
-            loginEroare.textContent = 'Email sau parolă incorectă.';
+            document.getElementById('login-eroare').textContent = 'Email sau parolă incorectă.';
         });
     });
 
-    document.getElementById('btn-logout').addEventListener('click', function () {
-        auth.signOut();
-    });
+    document.getElementById('btn-logout').addEventListener('click', function () { auth.signOut(); });
 
     // ── Init ──
     var adminInitialized = false;
     function initAdmin() {
         if (adminInitialized) return;
         adminInitialized = true;
-
         barCurent = selBar.value;
         updateCategoriiDropdown();
         loadProduse();
-
         selBar.addEventListener('change', function () {
             barCurent = selBar.value;
             updateCategoriiDropdown();
@@ -509,37 +547,163 @@
         categorieCurenta = Object.keys(categorii)[0];
     }
 
-    // ── Load products ──
+    // ── Load ──
     function loadProduse() {
-        listaProduse.innerHTML = '<div class="spinner">SE ÎNCARCĂ...</div>';
+        if (sortableInstance) { sortableInstance.destroy(); sortableInstance = null; }
+        listaActiva.innerHTML = '<div class="spinner">SE ÎNCARCĂ...</div>';
+        listaAscunse.innerHTML = '';
+        sectiuneAscunse.style.display = 'none';
         db.ref('bars/' + barCurent + '/' + categorieCurenta).once('value').then(function (snap) {
             produseCurente = snap.val() || {};
             renderLista();
         });
     }
 
+    // ── Render ──
     function renderLista() {
         var keys = Object.keys(produseCurente);
-        if (keys.length === 0) {
-            listaProduse.innerHTML = '<div class="spinner">Nu există produse.</div>';
-            return;
+
+        keys.sort(function (a, b) {
+            var oa = produseCurente[a].order !== undefined ? Number(produseCurente[a].order) : 9999;
+            var ob = produseCurente[b].order !== undefined ? Number(produseCurente[b].order) : 9999;
+            return oa - ob;
+        });
+
+        var anyMissing = keys.some(function (k) { return produseCurente[k].order === undefined; });
+        if (anyMissing) {
+            var updates = {};
+            keys.forEach(function (k, i) {
+                produseCurente[k].order = i;
+                updates['bars/' + barCurent + '/' + categorieCurenta + '/' + k + '/order'] = i;
+            });
+            db.ref().update(updates);
         }
-        listaProduse.innerHTML = keys.map(function (key) {
-            var p = produseCurente[key];
-            var detalii = [
-                p.tip, p.berarie, p.gramaj,
-                (p.alcool && parseFloat(p.alcool) !== 0) ? p.alcool + '%' : ''
-            ].filter(Boolean).join(' · ');
-            return '<div class="produs-admin">' +
-                '<div class="produs-admin-info">' +
-                '<div class="produs-admin-nume">' + (p.nume || '') + '</div>' +
-                (detalii ? '<div class="produs-admin-detalii">' + detalii + '</div>' : '') +
-                '</div>' +
-                '<div class="produs-admin-pret">' + (p.pret !== undefined ? p.pret : '') + '</div>' +
-                '<button class="btn-icon" onclick="deschideEditare(\'' + key + '\')">✏️</button>' +
-                '<button class="btn-icon" onclick="stergeProdus(\'' + key + '\')">🗑️</button>' +
-                '</div>';
-        }).join('');
+
+        var vizibile = keys.filter(function (k) { return !produseCurente[k].ascuns; });
+        var ascunse  = keys.filter(function (k) { return  produseCurente[k].ascuns; });
+
+        listaActiva.innerHTML = vizibile.length
+            ? vizibile.map(cardHtml).join('')
+            : '<div class="spinner">Nu există produse active.</div>';
+
+        if (ascunse.length > 0) {
+            listaAscunse.innerHTML = ascunse.map(cardHtml).join('');
+            sectiuneAscunse.style.display = 'block';
+        } else {
+            listaAscunse.innerHTML = '';
+            sectiuneAscunse.style.display = 'none';
+        }
+
+        initSortable();
+    }
+
+    function cardHtml(key) {
+        var p = produseCurente[key];
+        var pretStr = p.pret !== undefined
+            ? (isNaN(p.pret) ? String(p.pret).toUpperCase() : p.pret + ' LEI')
+            : '';
+        var detalii = [
+            p.tip, p.berarie, p.gramaj,
+            (p.alcool && parseFloat(p.alcool) !== 0) ? p.alcool + '%' : '',
+            pretStr
+        ].filter(Boolean).join(' · ');
+
+        return '<div class="produs-admin' + (p.soldOut ? ' e-sold-out' : '') + '" data-key="' + key + '">' +
+            '<span class="drag-handle">⠿⠿</span>' +
+            '<div class="produs-admin-body">' +
+            '<div class="produs-admin-info">' +
+            '<div class="produs-admin-nume">' + (p.nume || '') + '</div>' +
+            (detalii ? '<div class="produs-admin-detalii">' + detalii + '</div>' : '') +
+            '</div>' +
+            '<div class="produs-admin-actiuni">' +
+            '<button class="btn-actiune' + (p.soldOut ? ' activ' : '') + '" onclick="toggleSoldOut(\'' + key + '\')">SOLD OUT</button>' +
+            '<button class="btn-actiune' + (p.ascuns  ? ' activ' : '') + '" onclick="toggleAscuns(\'' + key + '\')">' + (p.ascuns ? 'ARATĂ' : 'ASCUNDE') + '</button>' +
+            '<button class="btn-actiune" onclick="deschideEditare(\'' + key + '\')">MODIFICĂ</button>' +
+            '<button class="btn-actiune btn-sterge" onclick="stergeProdus(\'' + key + '\')">ȘTERGE</button>' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+    }
+
+    // ── Sortable ──
+    function initSortable() {
+        if (typeof Sortable === 'undefined') return;
+        if (sortableInstance) sortableInstance.destroy();
+        sortableInstance = Sortable.create(listaActiva, {
+            handle: '.drag-handle',
+            animation: 150,
+            ghostClass: 'drag-ghost',
+            onEnd: function () {
+                var cards = listaActiva.querySelectorAll('.produs-admin');
+                var updates = {};
+                for (var i = 0; i < cards.length; i++) {
+                    var k = cards[i].dataset.key;
+                    if (k) {
+                        produseCurente[k].order = i;
+                        updates['bars/' + barCurent + '/' + categorieCurenta + '/' + k + '/order'] = i;
+                    }
+                }
+                db.ref().update(updates);
+            }
+        });
+    }
+
+    // ── Sold out toggle ──
+    function toggleSoldOut(key) {
+        var val = !produseCurente[key].soldOut;
+        db.ref('bars/' + barCurent + '/' + categorieCurenta + '/' + key + '/soldOut').set(val);
+        produseCurente[key].soldOut = val;
+        var card = document.querySelector('[data-key="' + key + '"]');
+        if (!card) return;
+        card.classList.toggle('e-sold-out', val);
+        var btn = card.querySelectorAll('.btn-actiune')[0];
+        if (btn) btn.classList.toggle('activ', val);
+    }
+
+    // ── Ascuns toggle — moves card between sections ──
+    function toggleAscuns(key) {
+        var val = !produseCurente[key].ascuns;
+        db.ref('bars/' + barCurent + '/' + categorieCurenta + '/' + key + '/ascuns').set(val);
+        produseCurente[key].ascuns = val;
+
+        var card = document.querySelector('[data-key="' + key + '"]');
+        if (!card) return;
+
+        var btn = card.querySelectorAll('.btn-actiune')[1];
+        if (btn) {
+            btn.textContent = val ? 'ARATĂ' : 'ASCUNDE';
+            btn.classList.toggle('activ', val);
+        }
+
+        if (val) {
+            listaAscunse.appendChild(card);
+            sectiuneAscunse.style.display = 'block';
+            if (!listaActiva.querySelector('.produs-admin')) {
+                listaActiva.innerHTML = '<div class="spinner">Nu există produse active.</div>';
+            }
+        } else {
+            var emptyMsg = listaActiva.querySelector('.spinner');
+            if (emptyMsg) emptyMsg.remove();
+
+            var myOrder = produseCurente[key].order !== undefined ? Number(produseCurente[key].order) : 9999;
+            var activeCards = listaActiva.querySelectorAll('.produs-admin');
+            var inserted = false;
+            for (var i = 0; i < activeCards.length; i++) {
+                var k = activeCards[i].dataset.key;
+                var theirOrder = (k && produseCurente[k] && produseCurente[k].order !== undefined)
+                    ? Number(produseCurente[k].order) : 9999;
+                if (myOrder < theirOrder) {
+                    listaActiva.insertBefore(card, activeCards[i]);
+                    inserted = true;
+                    break;
+                }
+            }
+            if (!inserted) listaActiva.appendChild(card);
+
+            if (!listaAscunse.querySelector('.produs-admin')) {
+                sectiuneAscunse.style.display = 'none';
+            }
+        }
     }
 
     // ── Add ──
@@ -558,29 +722,24 @@
         formOverlay.classList.add('activ');
     }
 
-    // ── Close form ──
-    function inchideForm() {
-        formOverlay.classList.remove('activ');
-        editKey = null;
-    }
+    function inchideForm() { formOverlay.classList.remove('activ'); editKey = null; }
     document.getElementById('btn-close-form').addEventListener('click', inchideForm);
     document.getElementById('btn-anuleaza').addEventListener('click', inchideForm);
 
-    // ── Build form fields ──
     function buildForm(date) {
         var campuri = barConfig[barCurent].categorii[categorieCurenta].campuri;
         var multiline = { ingrediente: true, alergii: true };
         formCampuri.innerHTML = campuri.map(function (camp) {
             var val = date[camp] !== undefined ? date[camp] : '';
-            var label = '<div class="form-field"><label>' + (campLabels[camp] || camp).toUpperCase() + '</label>';
+            var lbl = '<div class="form-field"><label>' + (campLabels[camp] || camp).toUpperCase() + '</label>';
             if (multiline[camp]) {
-                return label + '<textarea id="camp-' + camp + '">' + val + '</textarea></div>';
+                return lbl + '<textarea id="camp-' + camp + '">' + esc(String(val)) + '</textarea></div>';
             }
-            return label + '<input type="text" id="camp-' + camp + '" value="' + escHtml(String(val)) + '"></div>';
+            return lbl + '<input type="text" id="camp-' + camp + '" value="' + esc(String(val)) + '"></div>';
         }).join('');
     }
 
-    function escHtml(s) {
+    function esc(s) {
         return s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     }
 
@@ -588,21 +747,34 @@
     document.getElementById('btn-salveaza').addEventListener('click', function () {
         var campuri = barConfig[barCurent].categorii[categorieCurenta].campuri;
         var produs = {};
+
+        if (editKey && produseCurente[editKey]) {
+            if (produseCurente[editKey].soldOut) produs.soldOut = true;
+            if (produseCurente[editKey].ascuns)  produs.ascuns  = true;
+            if (produseCurente[editKey].order !== undefined) produs.order = produseCurente[editKey].order;
+        }
+
         campuri.forEach(function (camp) {
             var el = document.getElementById('camp-' + camp);
             if (!el) return;
             var val = el.value.trim();
-            if (camp === 'alcool') {
-                produs[camp] = val !== '' ? parseFloat(val) || 0 : 0;
-            } else {
-                produs[camp] = val;
-            }
+            produs[camp] = camp === 'alcool' ? (val !== '' ? parseFloat(val) || 0 : 0) : val;
         });
 
         var path = 'bars/' + barCurent + '/' + categorieCurenta;
-        var promise = editKey
-            ? db.ref(path + '/' + editKey).set(produs)
-            : db.ref(path).push(produs);
+        var promise;
+        if (editKey) {
+            promise = db.ref(path + '/' + editKey).set(produs);
+        } else {
+            var maxOrder = -1;
+            Object.keys(produseCurente).forEach(function (k) {
+                if (produseCurente[k].order !== undefined && Number(produseCurente[k].order) > maxOrder) {
+                    maxOrder = Number(produseCurente[k].order);
+                }
+            });
+            produs.order = maxOrder + 1;
+            promise = db.ref(path).push(produs);
+        }
 
         promise.then(function () {
             inchideForm();

@@ -8,7 +8,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function renderSimplu(produse) {
         container.innerHTML = produse.map(function (p) {
-            return '<div class="produs">' +
+            var soldOutClass = p.soldOut ? ' sold-out' : '';
+            var overlay = p.soldOut ? '<div class="sold-out-overlay"></div>' : '';
+            return '<div class="produs' + soldOutClass + '">' +
+                overlay +
                 '<div class="produs-top">' +
                 '<span class="produs-nume">' + p.nume + '</span>' +
                 '<span class="produs-pret">' + p.pret + ' LEI</span>' +
@@ -21,7 +24,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function renderDetaliat(produse) {
         container.innerHTML = produse.map(function (p) {
-            return '<div class="produs">' +
+            var soldOutClass = p.soldOut ? ' sold-out' : '';
+            var overlay = p.soldOut ? '<div class="sold-out-overlay"></div>' : '';
+            return '<div class="produs' + soldOutClass + '">' +
+                overlay +
                 '<div class="produs-top">' +
                 '<span class="produs-nume">' + p.nume + '</span>' +
                 '<span class="produs-pret">' + p.pret + ' LEI</span>' +
@@ -38,13 +44,16 @@ document.addEventListener('DOMContentLoaded', function () {
         btn.classList.add('activ');
         var tip = btn.dataset.tip;
 
-        var url = DB_URL + '/bars/paine_goala/' + btn.dataset.category + '.json';
-        fetch(url)
+        fetch(DB_URL + '/bars/paine_goala/' + btn.dataset.category + '.json')
             .then(function (r) { return r.json(); })
             .then(function (data) {
                 var produse = data ? (Array.isArray(data) ? data : Object.values(data)) : [];
-                if (tip === 'detaliat') renderDetaliat(produse);
-                else renderSimplu(produse);
+                produse.sort(function (a, b) {
+                    return (a.order !== undefined ? a.order : 9999) - (b.order !== undefined ? b.order : 9999);
+                });
+                var vizibile = produse.filter(function (p) { return !p.ascuns; });
+                if (tip === 'detaliat') renderDetaliat(vizibile);
+                else renderSimplu(vizibile);
             });
     }
 

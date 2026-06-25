@@ -7,8 +7,12 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!tabs.length || !container) return;
 
     function renderProduse(produse) {
-        container.innerHTML = produse.map(function (p) {
-            return '<div class="produs">' +
+        var vizibile = produse.filter(function (p) { return !p.ascuns; });
+        container.innerHTML = vizibile.map(function (p) {
+            var soldOutClass = p.soldOut ? ' sold-out' : '';
+            var overlay = p.soldOut ? '<div class="sold-out-overlay"></div>' : '';
+            return '<div class="produs' + soldOutClass + '">' +
+                overlay +
                 '<div class="produs-top">' +
                 '<span class="produs-nume">' + p.nume + '<span class="produs-gramaj"> ' + (p.gramaj || '') + '</span></span>' +
                 '<span class="produs-pret">' + p.pret + ' LEI</span>' +
@@ -24,11 +28,13 @@ document.addEventListener('DOMContentLoaded', function () {
         tabs.forEach(function (t) { t.classList.remove('activ'); });
         btn.classList.add('activ');
 
-        var url = DB_URL + '/bars/mo_bucharest/' + btn.dataset.category + '.json';
-        fetch(url)
+        fetch(DB_URL + '/bars/mo_bucharest/' + btn.dataset.category + '.json')
             .then(function (r) { return r.json(); })
             .then(function (data) {
                 var produse = data ? (Array.isArray(data) ? data : Object.values(data)) : [];
+                produse.sort(function (a, b) {
+                    return (a.order !== undefined ? a.order : 9999) - (b.order !== undefined ? b.order : 9999);
+                });
                 renderProduse(produse);
             });
     }

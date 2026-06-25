@@ -149,3 +149,30 @@ footer p{
     color:#E8C84A;
     opacity: 0.7;
 }
+
+.produs { position: relative; }
+
+.produs.sold-out { opacity: 0.4; }
+
+.sold-out-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.sold-out-overlay::after {
+    content: 'SOLD OUT';
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.35em;
+    color: #E8C84A;
+    border: 1px solid rgba(232,200,74,0.55);
+    border-radius: 6px;
+    padding: 3px 10px;
+    background: rgba(74,12,24,0.8);
+}
