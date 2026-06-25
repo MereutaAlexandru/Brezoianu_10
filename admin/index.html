@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Brezoianu 10</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: #4A0C18;
+            color: #E8C84A;
+            font-family: 'Barlow Condensed', sans-serif;
+            min-height: 100vh;
+        }
+
+        /* ─── LOGIN ─── */
+        #login-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 24px;
+        }
+        .login-box { width: 100%; max-width: 360px; }
+        .login-box h1 {
+            font-size: 2rem;
+            letter-spacing: 0.25em;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .login-box input {
+            display: block;
+            width: 100%;
+            background: transparent;
+            border: 2px solid rgba(232,200,74,0.4);
+            border-radius: 12px;
+            color: #E8C84A;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 0.08em;
+            padding: 12px 16px;
+            margin-bottom: 14px;
+            -webkit-appearance: none;
+            outline: none;
+        }
+        .login-box input::placeholder { color: rgba(232,200,74,0.35); }
+        .login-box input:focus { border-color: #E8C84A; }
+        .btn-primary {
+            display: block;
+            width: 100%;
+            background: rgba(232,200,74,0.15);
+            border: 2px solid #E8C84A;
+            border-radius: 12px;
+            color: #E8C84A;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            padding: 12px 24px;
+            cursor: pointer;
+            -webkit-appearance: none;
+        }
+        .eroare {
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 12px;
+            min-height: 20px;
+            letter-spacing: 0.05em;
+        }
+
+        /* ─── ADMIN ─── */
+        #admin-screen { display: none; }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            border-bottom: 2px solid rgba(232,200,74,0.25);
+        }
+        .topbar h1 { font-size: 1.3rem; letter-spacing: 0.2em; }
+        .btn-logout {
+            background: transparent;
+            border: 2px solid rgba(232,200,74,0.4);
+            border-radius: 12px;
+            color: #E8C84A;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            padding: 6px 14px;
+            cursor: pointer;
+            -webkit-appearance: none;
+        }
+
+        .selectors {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 14px 20px;
+            border-bottom: 1px solid rgba(232,200,74,0.15);
+        }
+        .selector-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex: 1;
+            min-width: 140px;
+        }
+        .selector-group label {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            opacity: 0.5;
+        }
+        select {
+            -webkit-appearance: none;
+            background: transparent;
+            border: 2px solid rgba(232,200,74,0.4);
+            border-radius: 12px;
+            color: #E8C84A;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            padding: 8px 14px;
+            cursor: pointer;
+            outline: none;
+        }
+        select option { background: #4A0C18; color: #E8C84A; }
+
+        .produse-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px 8px;
+        }
+        .produse-header h2 {
+            font-size: 1rem;
+            letter-spacing: 0.15em;
+            opacity: 0.7;
+        }
+        .btn-adauga {
+            background: rgba(232,200,74,0.15);
+            border: 2px solid #E8C84A;
+            border-radius: 12px;
+            color: #E8C84A;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            padding: 6px 16px;
+            cursor: pointer;
+            -webkit-appearance: none;
+        }
+
+        #lista-produse { padding: 0 20px 20px; }
+
+        .produs-admin {
+            border: 1px solid rgba(232,200,74,0.2);
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .produs-admin-info { flex: 1; min-width: 0; }
+        .produs-admin-nume {
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .produs-admin-detalii {
+            font-size: 0.75rem;
+            opacity: 0.5;
+            letter-spacing: 0.1em;
+            margin-top: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .produs-admin-pret {
+            font-size: 0.95rem;
+            font-weight: 700;
+            white-space: nowrap;
+            opacity: 0.9;
+        }
+        .btn-icon {
+            background: transparent;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 4px;
+            opacity: 0.7;
+            line-height: 1;
+        }
+        .btn-icon:active { opacity: 1; }
+
+        #mesaj-status {
+            padding: 6px 20px 14px;
+            font-size: 0.9rem;
+            min-height: 32px;
+            color: #90EE90;
+            letter-spacing: 0.1em;
+        }
+
+        .spinner {
+            padding: 32px 20px;
+            opacity: 0.4;
+            letter-spacing: 0.2em;
+            font-size: 0.9rem;
+        }
+
+        /* ─── FORM OVERLAY ─── */
+        #form-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #4A0C18;
+            z-index: 100;
+            padding: 20px;
+            overflow-y: auto;
+            flex-direction: column;
+        }
+        #form-overlay.activ { display: flex; }
+
+        .form-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+        .form-header h2 { font-size: 1.2rem; letter-spacing: 0.15em; }
+        .btn-close {
+            background: transparent;
+            border: none;
+            color: #E8C84A;
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 4px 8px;
+            opacity: 0.7;
+        }
+        .btn-close:active { opacity: 1; }
+
+        .form-field { margin-bottom: 14px; }
+        .form-field label {
+            display: block;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            opacity: 0.5;
+            margin-bottom: 6px;
+        }
+        .form-field input,
+        .form-field textarea {
+            width: 100%;
+            background: transparent;
+            border: 2px solid rgba(232,200,74,0.35);
+            border-radius: 12px;
+            color: #E8C84A;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            padding: 10px 14px;
+            -webkit-appearance: none;
+            outline: none;
+        }
+        .form-field input:focus,
+        .form-field textarea:focus { border-color: #E8C84A; }
+        .form-field textarea { min-height: 70px; resize: vertical; }
+
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .btn-salveaza {
+            flex: 1;
+            background: rgba(232,200,74,0.2);
+            border: 2px solid #E8C84A;
+            border-radius: 12px;
+            color: #E8C84A;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            padding: 12px;
+            cursor: pointer;
+            -webkit-appearance: none;
+        }
+        .btn-anuleaza {
+            background: transparent;
+            border: 2px solid rgba(232,200,74,0.35);
+            border-radius: 12px;
+            color: #E8C84A;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 0.12em;
+            padding: 12px 20px;
+            cursor: pointer;
+            -webkit-appearance: none;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ─── LOGIN ─── -->
+<div id="login-screen">
+    <div class="login-box">
+        <h1>BREZOIANU 10</h1>
+        <form id="login-form">
+            <input type="email" id="email" placeholder="Email" required autocomplete="email">
+            <input type="password" id="password" placeholder="Parolă" required autocomplete="current-password">
+            <button type="submit" class="btn-primary">INTRĂ</button>
+            <div class="eroare" id="login-eroare"></div>
+        </form>
+    </div>
+</div>
+
+<!-- ─── ADMIN ─── -->
+<div id="admin-screen">
+    <div class="topbar">
+        <h1>BREZOIANU 10</h1>
+        <button class="btn-logout" id="btn-logout">IEȘI</button>
+    </div>
+
+    <div class="selectors">
+        <div class="selector-group">
+            <label>LOCAȚIE</label>
+            <select id="sel-bar">
+                <option value="ironic1">Ironic Bar I</option>
+                <option value="ironic2">Ironic Bar II</option>
+                <option value="mo_bucharest">MO Bucharest</option>
+                <option value="temple_of_brewzeus">Temple of Brewzeus</option>
+                <option value="paine_goala">Pâine Goală</option>
+            </select>
+        </div>
+        <div class="selector-group">
+            <label>CATEGORIE</label>
+            <select id="sel-categorie"></select>
+        </div>
+    </div>
+
+    <div class="produse-header">
+        <h2>PRODUSE</h2>
+        <button class="btn-adauga" id="btn-adauga">+ ADAUGĂ</button>
+    </div>
+
+    <div id="lista-produse"><div class="spinner">SE ÎNCARCĂ...</div></div>
+    <div id="mesaj-status"></div>
+</div>
+
+<!-- ─── FORM OVERLAY ─── -->
+<div id="form-overlay">
+    <div class="form-header">
+        <h2 id="form-titlu">PRODUS NOU</h2>
+        <button class="btn-close" id="btn-close-form">✕</button>
+    </div>
+    <div id="form-campuri"></div>
+    <div class="form-actions">
+        <button class="btn-anuleaza" id="btn-anuleaza">ANULEAZĂ</button>
+        <button class="btn-salveaza" id="btn-salveaza">SALVEAZĂ</button>
+    </div>
+</div>
+
+<!-- Firebase SDK (compat) -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<script>
+    firebase.initializeApp({
+        apiKey: "AIzaSyBq6sTza3Ude8WxJa9Drh_wzABZ7hvr9KI",
+        authDomain: "brezoianu10.firebaseapp.com",
+        databaseURL: "https://brezoianu10-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "brezoianu10",
+        storageBucket: "brezoianu10.firebasestorage.app",
+        messagingSenderId: "505739503988",
+        appId: "1:505739503988:web:264a68e7266897ad8d2421"
+    });
+
+    var auth = firebase.auth();
+    var db = firebase.database();
+
+    var barConfig = {
+        ironic1: {
+            categorii: {
+                plecari:    { label: 'Plecări',     campuri: ['nume','pret','tip','berarie','alcool'] },
+                sosiri:     { label: 'Sosiri',      campuri: ['nume','pret','tip','berarie','alcool'] },
+                zero_alcool:{ label: 'Zero Alcool', campuri: ['nume','pret','tip','berarie','alcool'] },
+                soft_drinks:{ label: 'Soft Drinks', campuri: ['nume','pret','tip','berarie'] }
+            }
+        },
+        ironic2: {
+            categorii: {
+                bere:       { label: 'Bere',        campuri: ['nume','pret','tip','berarie','alcool'] },
+                soft_drinks:{ label: 'Soft Drinks', campuri: ['nume','pret','tip','berarie'] }
+            }
+        },
+        mo_bucharest: {
+            categorii: {
+                burgers: { label: 'Burgers', campuri: ['nume','gramaj','pret','ingrediente','alergii'] },
+                sides:   { label: 'Sides',   campuri: ['nume','gramaj','pret','ingrediente','alergii'] },
+                deserts: { label: 'Deserts', campuri: ['nume','gramaj','pret','ingrediente','alergii'] }
+            }
+        },
+        temple_of_brewzeus: {
+            categorii: {
+                cafea:        { label: 'Cafea',        campuri: ['nume','pret'] },
+                cold_coffee:  { label: 'Cold Coffee',  campuri: ['nume','pret'] },
+                alte_bauturi: { label: 'Alte Băuturi', campuri: ['nume','pret'] },
+                fresh:        { label: 'Fresh',        campuri: ['nume','pret'] }
+            }
+        },
+        paine_goala: {
+            categorii: {
+                paine:       { label: 'Pâine',       campuri: ['nume','pret','alergii'] },
+                patiserie:   { label: 'Patiserie',   campuri: ['nume','pret','alergii'] },
+                gatite:      { label: 'Gătite',      campuri: ['nume','pret','ingrediente','alergii'] },
+                sandwichuri: { label: 'Sandwichuri', campuri: ['nume','pret','ingrediente','alergii'] }
+            }
+        }
+    };
+
+    var campLabels = {
+        nume: 'Nume', pret: 'Preț', tip: 'Tip', berarie: 'Berărie',
+        alcool: 'Alcool (%)', gramaj: 'Gramaj', ingrediente: 'Ingrediente', alergii: 'Alergii'
+    };
+
+    var barCurent = 'ironic1';
+    var categorieCurenta = 'plecari';
+    var produseCurente = {};
+    var editKey = null;
+
+    var loginScreen  = document.getElementById('login-screen');
+    var adminScreen  = document.getElementById('admin-screen');
+    var loginForm    = document.getElementById('login-form');
+    var loginEroare  = document.getElementById('login-eroare');
+    var selBar       = document.getElementById('sel-bar');
+    var selCategorie = document.getElementById('sel-categorie');
+    var listaProduse = document.getElementById('lista-produse');
+    var mesajStatus  = document.getElementById('mesaj-status');
+    var formOverlay  = document.getElementById('form-overlay');
+    var formTitlu    = document.getElementById('form-titlu');
+    var formCampuri  = document.getElementById('form-campuri');
+
+    // ── Auth state ──
+    auth.onAuthStateChanged(function (user) {
+        if (user) {
+            loginScreen.style.display = 'none';
+            adminScreen.style.display = 'block';
+            initAdmin();
+        } else {
+            loginScreen.style.display = 'flex';
+            adminScreen.style.display = 'none';
+        }
+    });
+
+    // ── Login ──
+    loginForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        loginEroare.textContent = '';
+        auth.signInWithEmailAndPassword(
+            document.getElementById('email').value,
+            document.getElementById('password').value
+        ).catch(function () {
+            loginEroare.textContent = 'Email sau parolă incorectă.';
+        });
+    });
+
+    document.getElementById('btn-logout').addEventListener('click', function () {
+        auth.signOut();
+    });
+
+    // ── Init ──
+    var adminInitialized = false;
+    function initAdmin() {
+        if (adminInitialized) return;
+        adminInitialized = true;
+
+        barCurent = selBar.value;
+        updateCategoriiDropdown();
+        loadProduse();
+
+        selBar.addEventListener('change', function () {
+            barCurent = selBar.value;
+            updateCategoriiDropdown();
+            loadProduse();
+        });
+        selCategorie.addEventListener('change', function () {
+            categorieCurenta = selCategorie.value;
+            loadProduse();
+        });
+    }
+
+    function updateCategoriiDropdown() {
+        var categorii = barConfig[barCurent].categorii;
+        selCategorie.innerHTML = '';
+        Object.keys(categorii).forEach(function (key) {
+            var opt = document.createElement('option');
+            opt.value = key;
+            opt.textContent = categorii[key].label;
+            selCategorie.appendChild(opt);
+        });
+        categorieCurenta = Object.keys(categorii)[0];
+    }
+
+    // ── Load products ──
+    function loadProduse() {
+        listaProduse.innerHTML = '<div class="spinner">SE ÎNCARCĂ...</div>';
+        db.ref('bars/' + barCurent + '/' + categorieCurenta).once('value').then(function (snap) {
+            produseCurente = snap.val() || {};
+            renderLista();
+        });
+    }
+
+    function renderLista() {
+        var keys = Object.keys(produseCurente);
+        if (keys.length === 0) {
+            listaProduse.innerHTML = '<div class="spinner">Nu există produse.</div>';
+            return;
+        }
+        listaProduse.innerHTML = keys.map(function (key) {
+            var p = produseCurente[key];
+            var detalii = [
+                p.tip, p.berarie, p.gramaj,
+                (p.alcool && parseFloat(p.alcool) !== 0) ? p.alcool + '%' : ''
+            ].filter(Boolean).join(' · ');
+            return '<div class="produs-admin">' +
+                '<div class="produs-admin-info">' +
+                '<div class="produs-admin-nume">' + (p.nume || '') + '</div>' +
+                (detalii ? '<div class="produs-admin-detalii">' + detalii + '</div>' : '') +
+                '</div>' +
+                '<div class="produs-admin-pret">' + (p.pret !== undefined ? p.pret : '') + '</div>' +
+                '<button class="btn-icon" onclick="deschideEditare(\'' + key + '\')">✏️</button>' +
+                '<button class="btn-icon" onclick="stergeProdus(\'' + key + '\')">🗑️</button>' +
+                '</div>';
+        }).join('');
+    }
+
+    // ── Add ──
+    document.getElementById('btn-adauga').addEventListener('click', function () {
+        editKey = null;
+        formTitlu.textContent = 'PRODUS NOU';
+        buildForm({});
+        formOverlay.classList.add('activ');
+    });
+
+    // ── Edit ──
+    function deschideEditare(key) {
+        editKey = key;
+        formTitlu.textContent = 'EDITEAZĂ PRODUS';
+        buildForm(produseCurente[key] || {});
+        formOverlay.classList.add('activ');
+    }
+
+    // ── Close form ──
+    function inchideForm() {
+        formOverlay.classList.remove('activ');
+        editKey = null;
+    }
+    document.getElementById('btn-close-form').addEventListener('click', inchideForm);
+    document.getElementById('btn-anuleaza').addEventListener('click', inchideForm);
+
+    // ── Build form fields ──
+    function buildForm(date) {
+        var campuri = barConfig[barCurent].categorii[categorieCurenta].campuri;
+        var multiline = { ingrediente: true, alergii: true };
+        formCampuri.innerHTML = campuri.map(function (camp) {
+            var val = date[camp] !== undefined ? date[camp] : '';
+            var label = '<div class="form-field"><label>' + (campLabels[camp] || camp).toUpperCase() + '</label>';
+            if (multiline[camp]) {
+                return label + '<textarea id="camp-' + camp + '">' + val + '</textarea></div>';
+            }
+            return label + '<input type="text" id="camp-' + camp + '" value="' + escHtml(String(val)) + '"></div>';
+        }).join('');
+    }
+
+    function escHtml(s) {
+        return s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    // ── Save ──
+    document.getElementById('btn-salveaza').addEventListener('click', function () {
+        var campuri = barConfig[barCurent].categorii[categorieCurenta].campuri;
+        var produs = {};
+        campuri.forEach(function (camp) {
+            var el = document.getElementById('camp-' + camp);
+            if (!el) return;
+            var val = el.value.trim();
+            if (camp === 'alcool') {
+                produs[camp] = val !== '' ? parseFloat(val) || 0 : 0;
+            } else {
+                produs[camp] = val;
+            }
+        });
+
+        var path = 'bars/' + barCurent + '/' + categorieCurenta;
+        var promise = editKey
+            ? db.ref(path + '/' + editKey).set(produs)
+            : db.ref(path).push(produs);
+
+        promise.then(function () {
+            inchideForm();
+            showStatus('Salvat!');
+            loadProduse();
+        }).catch(function (err) {
+            showStatus('Eroare: ' + err.message);
+        });
+    });
+
+    // ── Delete ──
+    function stergeProdus(key) {
+        if (!confirm('Ștergi produsul?')) return;
+        db.ref('bars/' + barCurent + '/' + categorieCurenta + '/' + key).remove().then(function () {
+            showStatus('Produs șters.');
+            loadProduse();
+        });
+    }
+
+    function showStatus(msg) {
+        mesajStatus.textContent = msg;
+        setTimeout(function () { mesajStatus.textContent = ''; }, 3000);
+    }
+</script>
+</body>
+</html>

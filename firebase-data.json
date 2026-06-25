@@ -1,0 +1,111 @@
+{
+  "bars": {
+    "ironic1": {
+      "plecari": [
+        { "nume": "Internationally Unknown", "pret": 6, "tip": "IPA", "berarie": "Ironic", "alcool": 6.0 },
+        { "nume": "Mexican Lager", "pret": 5, "tip": "Lager cu Lime", "berarie": "Ironic", "alcool": 4.2 },
+        { "nume": "Almost There", "pret": 5, "tip": "Lager", "berarie": "Ironic", "alcool": 4.5 },
+        { "nume": "Dan Yuzurpatorul", "pret": 7, "tip": "Lager cu Yuzu", "berarie": "Ironic", "alcool": 4.5 },
+        { "nume": "Zmeuripa", "pret": 7, "tip": "IPA", "berarie": "Ironic", "alcool": 4.5 },
+        { "nume": "#Mangoipa", "pret": 7, "tip": "IPA", "berarie": "Ironic", "alcool": 5.0 },
+        { "nume": "Easy Juice", "pret": 5, "tip": "NON ALC", "berarie": "Ironic", "alcool": 0.0 },
+        { "nume": "Sicovitol", "pret": 6, "tip": "IPA cu Zmeură", "berarie": "Ironic", "alcool": 5.0 }
+      ],
+      "zero_alcool": [
+        { "nume": "Easy Juice", "pret": 5, "tip": "NON ALC", "berarie": "Ironic", "alcool": 0.0 }
+      ],
+      "soft_drinks": [
+        { "nume": "APA", "pret": "GRATIS", "tip": "", "berarie": "" },
+        { "nume": "GINGEREL", "pret": 19, "tip": "Sucusor cu ghimbir", "berarie": "Ironic" },
+        { "nume": "MUREL", "pret": 19, "tip": "Sucusor cu mure", "berarie": "Ironic" }
+      ]
+    },
+    "ironic2": {
+      "bere": [
+        { "nume": "Temara", "pret": 6, "tip": "Porter", "berarie": "Maktoob", "alcool": 5.0 },
+        { "nume": "Too Long for Oolong", "pret": 7, "tip": "Oolong Tea Nectarines Sour", "berarie": "Maktoob & OneTwo", "alcool": 5.0 },
+        { "nume": "Mexican Lager", "pret": 5, "tip": "Lager cu Lime", "berarie": "Ironic", "alcool": 5.0 },
+        { "nume": "Caterinci Obosite", "pret": 7, "tip": "Sour cu Bergamotă și Cocos", "berarie": "Ironic", "alcool": 4.5 },
+        { "nume": "Apologia Monotoniei", "pret": 7, "tip": "Sour", "berarie": "Ironic", "alcool": 4.2 },
+        { "nume": "Dan Yuzurpatorul", "pret": 7, "tip": "Lager cu Yuzu", "berarie": "Ironic", "alcool": 5.0 },
+        { "nume": "Internationally Unknown", "pret": 6, "tip": "IPA", "berarie": "Ironic", "alcool": 5.5 }
+      ],
+      "soft_drinks": [
+        { "nume": "APA", "pret": "GRATIS", "tip": "", "berarie": "" },
+        { "nume": "Lasă-mă papa la mure", "pret": 19, "tip": "Sucusor cu Ghimbă și Mure", "berarie": "Bulă" },
+        { "nume": "Gingerel", "pret": 19, "tip": "Sucusor cu Ghimbir", "berarie": "Bulă" }
+      ]
+    },
+    "mo_bucharest": {
+      "burgers": [
+        { "nume": "Baxi", "gramaj": "220g", "pret": 49, "ingrediente": "potato bun, fresh local beef, double cheddar, special mayo sauce, lettuce, pickles, red onion", "alergii": "milk, egg, gluten, mustard" },
+        { "nume": "Italian", "gramaj": "230g", "pret": 49, "ingrediente": "potato bun, fresh local beef, mozzarella, basil mayo sauce, rucola, tomato", "alergii": "milk, egg, gluten" },
+        { "nume": "Korean", "gramaj": "230g", "pret": 49, "ingrediente": "potato bun, fresh local beef, mozzarella, gochujang mayo sauce, lettuce, red onion", "alergii": "milk, egg, gluten, soy, sesame" },
+        { "nume": "Black Truffle", "gramaj": "220g", "pret": 51, "ingrediente": "potato bun, fresh local beef, smoked cheese, mayo, black truffle, grilled red onion", "alergii": "milk, egg, gluten" },
+        { "nume": "Veggie", "gramaj": "280g", "pret": 49, "ingrediente": "thyme, mozzarella, grana padano, rucola, mayo, truffle sauce", "alergii": "milk, egg, gluten" },
+        { "nume": "Blue Magiun", "gramaj": "270g", "pret": 51, "ingrediente": "potato bun, fresh local beef, mozzarella, basil mayo sauce, rucola, tomato", "alergii": "" },
+        { "nume": "Romanian", "gramaj": "260g", "pret": 49, "ingrediente": "potato bun, fresh local beef, smoked cheese, horseradish mustard mayo sauce, lettuce, pickles", "alergii": "milk, egg, gluten, mustard" },
+        { "nume": "Romanian 2.0", "gramaj": "240g", "pret": 51, "ingrediente": "potato bun, fresh local beef, smoked cheese, horseradish mustard mayo sauce, lettuce, pickles", "alergii": "milk, egg, gluten, mustard" },
+        { "nume": "Vela aka MOFC", "gramaj": "270g", "pret": 49, "ingrediente": "potato bun, Jamaican style fried chicken, cheddar, lettuce, mayo, garlic, pickles, Jamaican hot sauce", "alergii": "milk, egg, gluten, mustard" }
+      ],
+      "sides": [
+        { "nume": "Oregano Fries", "gramaj": "160g", "pret": 14, "ingrediente": "", "alergii": "" },
+        { "nume": "Grana Padano Fries", "gramaj": "160g", "pret": 13, "ingrediente": "", "alergii": "MILK; EGG" },
+        { "nume": "Garlic Mayo Sauce", "gramaj": "40g", "pret": 7, "ingrediente": "", "alergii": "EGG" },
+        { "nume": "Mixed Milisauti Pickles", "gramaj": "150g", "pret": 19, "ingrediente": "", "alergii": "" }
+      ],
+      "deserts": [
+        { "nume": "Burnt Basque Cheesecake", "gramaj": "170g", "pret": 29, "ingrediente": "Erico Periferico", "alergii": "MILK, EGG" },
+        { "nume": "Burnt Burduf Cheesecake", "gramaj": "160g", "pret": 28, "ingrediente": "Erico Periferico", "alergii": "MILK, EGG" }
+      ]
+    },
+    "temple_of_brewzeus": {
+      "cafea": [
+        { "nume": "Espresso", "pret": "9 / 12" },
+        { "nume": "Long Black", "pret": "12" },
+        { "nume": "Batch Brew", "pret": "10 / 15" },
+        { "nume": "Ibrik", "pret": "10" },
+        { "nume": "Cortado", "pret": "12" },
+        { "nume": "Cappuccino", "pret": "15" },
+        { "nume": "Flat White", "pret": "17" },
+        { "nume": "Latte (single / double shot)", "pret": "16 / 19" },
+        { "nume": "Hot / Cold Cocoa", "pret": "9" },
+        { "nume": "Non Dairy Milk", "pret": "+3" }
+      ],
+      "cold_coffee": [
+        { "nume": "Cold Brew / Cold Brew Latte", "pret": "17" },
+        { "nume": "Cold Brew Tonic / Espresso Tonic", "pret": "19" },
+        { "nume": "Iced Latte", "pret": "17" }
+      ],
+      "alte_bauturi": [
+        { "nume": "Spritz", "pret": "17" },
+        { "nume": "Sea Libre", "pret": "32" },
+        { "nume": "Raspberry Tonic", "pret": "20" },
+        { "nume": "Linden Elderflower Iced Tea", "pret": "25" }
+      ],
+      "fresh": [
+        { "nume": "Fresh Juice / Socată", "pret": "17 / 21" },
+        { "nume": "Matcha Latte / Pineapple Matcha", "pret": "19 / 25" },
+        { "nume": "Tea Infusion", "pret": "19 / 20" }
+      ]
+    },
+    "paine_goala": {
+      "paine": [
+        { "nume": "Pâine de Secară", "pret": 12, "alergii": "gluten" },
+        { "nume": "Sourdough Clasic", "pret": 14, "alergii": "gluten" }
+      ],
+      "patiserie": [
+        { "nume": "Croissant cu Unt", "pret": 16, "alergii": "gluten, lactate, ouă" },
+        { "nume": "Danish cu Fructe", "pret": 18, "alergii": "gluten, lactate, ouă" }
+      ],
+      "gatite": [
+        { "nume": "Salată de Vinete", "pret": 22, "ingrediente": "vinete coapte, ulei de floarea soarelui, usturoi, sare", "alergii": "" },
+        { "nume": "Pesto Proaspăt", "pret": 19, "ingrediente": "busuioc, ulei de măsline, grana padano, usturoi, nuci de pin", "alergii": "lactate, nuci" }
+      ],
+      "sandwichuri": [
+        { "nume": "Club Sandwich", "pret": 32, "ingrediente": "sourdough, piept de pui, bacon, ou, salată, roșie, mayo", "alergii": "gluten, ouă, muștar" },
+        { "nume": "Sandwich Tonată", "pret": 28, "ingrediente": "sourdough, ton, capere, roșie, rucola, mayo cu lămâie", "alergii": "gluten, pește, ouă, muștar" }
+      ]
+    }
+  }
+}

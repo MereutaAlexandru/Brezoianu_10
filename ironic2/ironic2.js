@@ -1,6 +1,8 @@
+var DB_URL = 'https://brezoianu10-default-rtdb.europe-west1.firebasedatabase.app';
+
 document.addEventListener('DOMContentLoaded', function () {
-    const tabs = document.querySelectorAll('.tab-btn');
-    const container = document.getElementById('produse');
+    var tabs = document.querySelectorAll('.tab-btn');
+    var container = document.getElementById('produse');
 
     if (!tabs.length || !container) return;
 
@@ -9,12 +11,12 @@ document.addEventListener('DOMContentLoaded', function () {
             var berarieName = p.berarie === 'Ironic' ? ';)' : p.berarie;
             var parts = [];
             if (p.tip) parts.push(p.tip);
-            if (p.alcool) parts.push(p.alcool + '%');
+            if (p.alcool && parseFloat(p.alcool) !== 0) parts.push(p.alcool + '%');
             var detalii = parts.join(' · ');
             return '<div class="produs">' +
                 '<div class="produs-top">' +
                 '<span class="produs-nume">' + p.nume + (berarieName ? ' <span class="produs-tip">- ' + berarieName + '</span>' : '') + '</span>' +
-                '<span class="produs-pret">' + (isNaN(p.pret) ? p.pret : p.pret + ' LEI') + '</span>' +
+                '<span class="produs-pret">' + (isNaN(p.pret) ? String(p.pret).toUpperCase() : p.pret + ' LEI') + '</span>' +
                 '</div>' +
                 '<div class="produs-linie"></div>' +
                 '<div class="produs-detalii">' + detalii + '</div>' +
@@ -26,10 +28,15 @@ document.addEventListener('DOMContentLoaded', function () {
         tabs.forEach(function (t) { t.classList.remove('activ'); });
         btn.classList.add('activ');
         var label = document.querySelector('.tabs-label');
-        if (label) label.style.visibility = btn.dataset.json === 'soft_drinks2.json' ? 'hidden' : 'visible';
-        fetch(btn.dataset.json)
+        if (label) label.style.visibility = btn.dataset.category === 'soft_drinks' ? 'hidden' : 'visible';
+
+        var url = DB_URL + '/bars/ironic2/' + btn.dataset.category + '.json';
+        fetch(url)
             .then(function (r) { return r.json(); })
-            .then(renderProduse);
+            .then(function (data) {
+                var produse = data ? (Array.isArray(data) ? data : Object.values(data)) : [];
+                renderProduse(produse);
+            });
     }
 
     tabs.forEach(function (btn) {

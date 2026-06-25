@@ -1,6 +1,8 @@
+var DB_URL = 'https://brezoianu10-default-rtdb.europe-west1.firebasedatabase.app';
+
 document.addEventListener('DOMContentLoaded', function () {
-    const tabs = document.querySelectorAll('.tab-btn');
-    const container = document.getElementById('produse');
+    var tabs = document.querySelectorAll('.tab-btn');
+    var container = document.getElementById('produse');
 
     if (!tabs.length || !container) return;
 
@@ -35,11 +37,14 @@ document.addEventListener('DOMContentLoaded', function () {
         tabs.forEach(function (t) { t.classList.remove('activ'); });
         btn.classList.add('activ');
         var tip = btn.dataset.tip;
-        fetch(btn.dataset.json)
+
+        var url = DB_URL + '/bars/paine_goala/' + btn.dataset.category + '.json';
+        fetch(url)
             .then(function (r) { return r.json(); })
             .then(function (data) {
-                if (tip === 'detaliat') renderDetaliat(data);
-                else renderSimplu(data);
+                var produse = data ? (Array.isArray(data) ? data : Object.values(data)) : [];
+                if (tip === 'detaliat') renderDetaliat(produse);
+                else renderSimplu(produse);
             });
     }
 

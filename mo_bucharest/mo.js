@@ -1,6 +1,8 @@
+var DB_URL = 'https://brezoianu10-default-rtdb.europe-west1.firebasedatabase.app';
+
 document.addEventListener('DOMContentLoaded', function () {
-    const tabs = document.querySelectorAll('.tab-btn');
-    const container = document.getElementById('produse');
+    var tabs = document.querySelectorAll('.tab-btn');
+    var container = document.getElementById('produse');
 
     if (!tabs.length || !container) return;
 
@@ -13,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 '</div>' +
                 '<div class="produs-linie"></div>' +
                 (p.ingrediente ? '<div class="produs-ingrediente">' + p.ingrediente + '</div>' : '') +
-                (p.alergii ? '<div class="produs-alergii">Alergii: ' + p.alergii + '</div>' : '') +
+                (p.alergii ? '<div class="produs-alergii">Allergens: ' + p.alergii + '</div>' : '') +
                 '</div>';
         }).join('');
     }
@@ -21,9 +23,14 @@ document.addEventListener('DOMContentLoaded', function () {
     function loadTab(btn) {
         tabs.forEach(function (t) { t.classList.remove('activ'); });
         btn.classList.add('activ');
-        fetch(btn.dataset.json)
+
+        var url = DB_URL + '/bars/mo_bucharest/' + btn.dataset.category + '.json';
+        fetch(url)
             .then(function (r) { return r.json(); })
-            .then(renderProduse);
+            .then(function (data) {
+                var produse = data ? (Array.isArray(data) ? data : Object.values(data)) : [];
+                renderProduse(produse);
+            });
     }
 
     tabs.forEach(function (btn) {
