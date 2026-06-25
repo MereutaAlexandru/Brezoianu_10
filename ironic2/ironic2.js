@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return '<div class="produs">' +
                 '<div class="produs-top">' +
                 '<span class="produs-nume">' + p.nume + (berarieName ? ' <span class="produs-tip">- ' + berarieName + '</span>' : '') + '</span>' +
-                '<span class="produs-pret">' + p.pret + ' LEI</span>' +
+                '<span class="produs-pret">' + (isNaN(p.pret) ? p.pret : p.pret + ' LEI') + '</span>' +
                 '</div>' +
                 '<div class="produs-linie"></div>' +
                 '<div class="produs-detalii">' + detalii + '</div>' +
@@ -25,6 +25,8 @@ document.addEventListener('DOMContentLoaded', function () {
     function loadTab(btn) {
         tabs.forEach(function (t) { t.classList.remove('activ'); });
         btn.classList.add('activ');
+        var label = document.querySelector('.tabs-label');
+        if (label) label.style.visibility = btn.dataset.json === 'soft_drinks2.json' ? 'hidden' : 'visible';
         fetch(btn.dataset.json)
             .then(function (r) { return r.json(); })
             .then(renderProduse);

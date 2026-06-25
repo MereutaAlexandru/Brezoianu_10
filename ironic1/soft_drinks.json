@@ -1,0 +1,5 @@
+[
+  { "nume": "APA", "pret": "GRATIS", "tip": "", "berarie": "" },
+  { "nume": "GINGEREL", "pret": 19, "tip": "Sucusor cu ghimbir", "berarie": "Ironic" },
+  { "nume": "MUREL", "pret": 19, "tip": "Sucusor cu mure", "berarie": "Ironic" }
+]

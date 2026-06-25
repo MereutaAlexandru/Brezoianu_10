@@ -60,7 +60,7 @@ main {
 }
 
 .titlu-principal {
-  font-size: 2.5rem;
+  font-size: 2.7rem;
   font-weight: 900;
   letter-spacing: 0.1em;
   color: #E8C84A;
@@ -77,10 +77,10 @@ main {
 }
 
 .subtitlu {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   letter-spacing: 0.3em;
   color: #E8C84A;
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
 .card {

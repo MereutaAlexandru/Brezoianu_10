@@ -1,5 +1,10 @@
 [
-  { "nume": "Wheat King", "pret": 13, "tip": "Weiss", "berarie": "Ground Breaker", "alcool": 5.2 },
-  { "nume": "Red Session", "pret": 14, "tip": "Red Ale", "berarie": "Hophead", "alcool": 4.8 },
-  { "nume": "Crispy Lager", "pret": 12, "tip": "Lager", "berarie": "Zaganu", "alcool": 4.5 }
+  { "nume": "Internationally Unknown", "pret": 6, "tip": "IPA", "berarie": "Ironic", "alcool": 6.0 },
+  { "nume": "Mexican Lager", "pret": 5, "tip": "Lager cu Lime", "berarie": "Ironic", "alcool": 4.2 },
+  { "nume": "Almost There", "pret": 5, "tip": "Lager", "berarie": "Ironic", "alcool": 4.5 },
+  { "nume": "Dan Yuzurpatorul", "pret": 7, "tip": "Lager cu Yuzu", "berarie": "Ironic", "alcool": 4.5 },
+  { "nume": "Zmeuripa", "pret": 7, "tip": "IPA", "berarie": "Ironic", "alcool": 4.5 },
+  { "nume": "#Mangoipa", "pret": 7, "tip": "IPA", "berarie": "Ironic", "alcool": 5.0 },
+  { "nume": "Easy Juice", "pret": 5, "tip": "NON ALC", "berarie": "Ironic", "alcool": 0.0 },
+  { "nume": "Sicovitol", "pret": 6, "tip": "IPA cu Zmeură", "berarie": "Ironic", "alcool": 5.0 }
 ]

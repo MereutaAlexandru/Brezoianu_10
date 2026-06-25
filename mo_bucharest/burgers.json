@@ -26,7 +26,7 @@
   },
   {
     "nume": "Blue Magiun", "gramaj": "270g", "pret": 51,
-    "ingrediente": "",
+    "ingrediente": "potato bun, fresh local beef, mozzarella, basil mayo sauce, rucola, tomato",
     "alergii": ""
   },
   {
@@ -36,8 +36,8 @@
   },
   {
     "nume": "Romanian 2.0", "gramaj": "240g", "pret": 51,
-    "ingrediente": "",
-    "alergii": ""
+    "ingrediente": "potato bun, fresh local beef, smoked cheese, horseradish mustard mayo sauce, lettuce, pickles",
+    "alergii": "milk, egg, gluten, mustard"
   },
   {
     "nume": "Vela aka MOFC", "gramaj": "270g", "pret": 49,

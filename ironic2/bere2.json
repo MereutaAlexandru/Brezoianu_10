@@ -1,24 +1,9 @@
 [
   { "nume": "Temara", "pret": 6, "tip": "Porter", "berarie": "Maktoob", "alcool": 5.0 },
-  { "nume": "Double Happiness", "pret": 8, "tip": "DIPA", "berarie": "Maktoob", "alcool": 8.0 },
-  { "nume": "Don't Feed the Cat", "pret": 6, "tip": "", "berarie": "Ironic", "alcool": 5.5 },
-  { "nume": "Too Long for Oolong", "pret": 7, "tip": "Oolong Tea Nectarines Sour", "berarie": "Maktoob & One Two", "alcool": 5.0 },
-  { "nume": "Stop the Pigeon", "pret": 6, "tip": "", "berarie": "Ironic", "alcool": 4.5 },
+  { "nume": "Too Long for Oolong", "pret": 7, "tip": "Oolong Tea Nectarines Sour", "berarie": "Maktoob & OneTwo", "alcool": 5.0 },
   { "nume": "Mexican Lager", "pret": 5, "tip": "Lager cu Lime", "berarie": "Ironic", "alcool": 5.0 },
   { "nume": "Caterinci Obosite", "pret": 7, "tip": "Sour cu Bergamotă și Cocos", "berarie": "Ironic", "alcool": 4.5 },
-  { "nume": "Misery Loves Company", "pret": 7, "tip": "", "berarie": "Ironic", "alcool": 6.0 },
-  { "nume": "Apologia Monotoniei", "pret": 7, "tip": "", "berarie": "Ironic", "alcool": 4.2 },
+  { "nume": "Apologia Monotoniei", "pret": 7, "tip": "Sour", "berarie": "Ironic", "alcool": 4.2 },
   { "nume": "Dan Yuzurpatorul", "pret": 7, "tip": "Lager cu Yuzu", "berarie": "Ironic", "alcool": 5.0 },
-  { "nume": "Zmeuripa", "pret": 7, "tip": "IPA cu Zmeură", "berarie": "Ironic", "alcool": 5.5 },
-  { "nume": "Libero", "pret": 7, "tip": "DDH West Coast Pale Ale", "berarie": "Blackout", "alcool": 5.5 },
-  { "nume": "Citrine Machine", "pret": 7, "tip": "", "berarie": "One Two", "alcool": 7.0 },
-  { "nume": "Când Nu Se Poate Mai Rău", "pret": 5, "tip": "", "berarie": "Ironic", "alcool": 5.0 },
-  { "nume": "Skip the Cut Scene", "pret": 7, "tip": "", "berarie": "Ironic", "alcool": null },
-  { "nume": "Panic at Tesco", "pret": 6, "tip": "Fibo Pils", "berarie": "Hop & Maktoob", "alcool": 5.0 },
-  { "nume": "Internationally Unknown", "pret": 6, "tip": "IPA", "berarie": "Ironic", "alcool": 5.5 },
-  { "nume": "Not My Cup of Tea/u", "pret": 6, "tip": "White Tea Pale Ale", "berarie": "Ironic", "alcool": 5.0 },
-  { "nume": "Fiasco", "pret": 8, "tip": "DDH IPA", "berarie": "Blackout", "alcool": 6.0 },
-  { "nume": "Black Suit", "pret": 6, "tip": "Stout", "berarie": "THC", "alcool": 5.4 },
-  { "nume": "Triple Brutality", "pret": 8, "tip": "", "berarie": "Bereya & Krmbs", "alcool": 6.3 },
-  { "nume": "Irish Red Ale", "pret": 6, "tip": "Red Ale", "berarie": "Urban Hops", "alcool": 6.0 }
+  { "nume": "Internationally Unknown", "pret": 6, "tip": "IPA", "berarie": "Ironic", "alcool": 5.5 }
 ]

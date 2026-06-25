@@ -1,5 +1,3 @@
 [
-  { "nume": "Free Spirit", "pret": 11, "tip": "Lager 0.0%", "berarie": "Zaganu" },
-  { "nume": "Clean Slate", "pret": 12, "tip": "IPA 0.0%", "berarie": "Hop Hooligans" },
-  { "nume": "Wheat Free", "pret": 11, "tip": "Weiss 0.0%", "berarie": "Sikaru" }
+  { "nume": "Easy Juice", "pret": 5, "tip": "NON ALC", "berarie": "Ironic", "alcool": 0.0 }
 ]

@@ -1,5 +1,3 @@
 [
-  { "nume": "Blonde Ale", "pret": 14, "tip": "Blondă", "berarie": "Zaganu", "alcool": 5.0 },
-  { "nume": "Hop Junkie", "pret": 16, "tip": "IPA", "berarie": "Hop Hooligans", "alcool": 6.5 },
-  { "nume": "Dark Matter", "pret": 15, "tip": "Stout", "berarie": "Sikaru", "alcool": 5.8 }
+  
 ]
