@@ -1,9 +1,0 @@
-[
-  { "nume": "Temara", "pret": 6, "tip": "Porter", "berarie": "Maktoob", "alcool": 5.0 },
-  { "nume": "Too Long for Oolong", "pret": 7, "tip": "Oolong Tea Nectarines Sour", "berarie": "Maktoob & OneTwo", "alcool": 5.0 },
-  { "nume": "Mexican Lager", "pret": 5, "tip": "Lager cu Lime", "berarie": "Ironic", "alcool": 5.0 },
-  { "nume": "Caterinci Obosite", "pret": 7, "tip": "Sour cu Bergamotă și Cocos", "berarie": "Ironic", "alcool": 4.5 },
-  { "nume": "Apologia Monotoniei", "pret": 7, "tip": "Sour", "berarie": "Ironic", "alcool": 4.2 },
-  { "nume": "Dan Yuzurpatorul", "pret": 7, "tip": "Lager cu Yuzu", "berarie": "Ironic", "alcool": 5.0 },
-  { "nume": "Internationally Unknown", "pret": 6, "tip": "IPA", "berarie": "Ironic", "alcool": 5.5 }
-]
