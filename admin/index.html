@@ -150,6 +150,50 @@
             -webkit-appearance: none;
         }
 
+        /* Search bar */
+        .search-wrap {
+            padding: 0 20px 12px;
+            position: relative;
+        }
+        .search-wrap input {
+            width: 100%;
+            background: transparent;
+            border: 1px solid rgba(232,200,74,0.3);
+            border-radius: 10px;
+            color: #E8C84A;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 0.08em;
+            padding: 8px 36px 8px 14px;
+            -webkit-appearance: none;
+            outline: none;
+            transition: border-color 0.15s;
+        }
+        .search-wrap input::placeholder { color: rgba(232,200,74,0.3); }
+        .search-wrap input:focus { border-color: rgba(232,200,74,0.65); }
+        .search-clear {
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: rgba(232,200,74,0.5);
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 4px;
+            display: none;
+            line-height: 1;
+        }
+        .search-clear.vizibil { display: block; }
+        .search-gol {
+            padding: 20px 0 8px;
+            opacity: 0.4;
+            letter-spacing: 0.15em;
+            font-size: 0.9rem;
+            display: none;
+        }
+
         #lista-produse { padding: 0 20px; }
         #lista-activa { margin-bottom: 4px; }
 
@@ -347,6 +391,24 @@
             cursor: pointer;
             -webkit-appearance: none;
         }
+
+        /* Order number badge */
+        .nr-meniu {
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            color: #E8C84A;
+            min-width: 28px;
+            text-align: right;
+            flex-shrink: 0;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Hide drag handle for hidden items (they're sorted alphabetically) */
+        #lista-ascunse .drag-handle {
+            visibility: hidden;
+            cursor: default;
+        }
     </style>
 </head>
 <body>
@@ -393,8 +455,14 @@
         <button class="btn-adauga" id="btn-adauga">+ ADAUGĂ</button>
     </div>
 
+    <div class="search-wrap">
+        <input type="text" id="search-produse" placeholder="Caută produs..." autocomplete="off" spellcheck="false">
+        <button class="search-clear" id="search-clear" aria-label="Șterge căutarea">✕</button>
+    </div>
+
     <div id="lista-produse">
         <div id="lista-activa"><div class="spinner">SE ÎNCARCĂ...</div></div>
+        <div class="search-gol" id="search-gol">Niciun rezultat.</div>
         <div id="sectiune-ascunse" style="display:none">
             <div class="ascunse-header">ASCUNSE</div>
             <div id="lista-ascunse"></div>
@@ -478,6 +546,7 @@
     var produseCurente = {};
     var editKey = null;
     var sortableInstance = null;
+    var searchQuery = '';
 
     var loginScreen     = document.getElementById('login-screen');
     var adminScreen     = document.getElementById('admin-screen');
@@ -490,6 +559,9 @@
     var formCampuri     = document.getElementById('form-campuri');
     var selBar          = document.getElementById('sel-bar');
     var selCategorie    = document.getElementById('sel-categorie');
+    var searchInput     = document.getElementById('search-produse');
+    var searchClear     = document.getElementById('search-clear');
+    var searchGol       = document.getElementById('search-gol');
 
     // ── Auth ──
     auth.onAuthStateChanged(function (user) {
@@ -515,6 +587,18 @@
     });
 
     document.getElementById('btn-logout').addEventListener('click', function () { auth.signOut(); });
+
+    searchInput.addEventListener('input', function () {
+        searchClear.classList.toggle('vizibil', searchInput.value.length > 0);
+        filterProduse(searchInput.value);
+    });
+
+    searchClear.addEventListener('click', function () {
+        searchInput.value = '';
+        searchClear.classList.remove('vizibil');
+        filterProduse('');
+        searchInput.focus();
+    });
 
     // ── Init ──
     var adminInitialized = false;
@@ -549,6 +633,10 @@
 
     // ── Load ──
     function loadProduse() {
+        searchInput.value = '';
+        searchClear.classList.remove('vizibil');
+        searchQuery = '';
+        searchGol.style.display = 'none';
         if (sortableInstance) { sortableInstance.destroy(); sortableInstance = null; }
         listaActiva.innerHTML = '<div class="spinner">SE ÎNCARCĂ...</div>';
         listaAscunse.innerHTML = '';
@@ -563,31 +651,37 @@
     function renderLista() {
         var keys = Object.keys(produseCurente);
 
-        keys.sort(function (a, b) {
+        var vizibile = keys.filter(function (k) { return !produseCurente[k].ascuns; });
+        vizibile.sort(function (a, b) {
             var oa = produseCurente[a].order !== undefined ? Number(produseCurente[a].order) : 9999;
             var ob = produseCurente[b].order !== undefined ? Number(produseCurente[b].order) : 9999;
             return oa - ob;
         });
 
-        var anyMissing = keys.some(function (k) { return produseCurente[k].order === undefined; });
+        var ascunse = keys.filter(function (k) { return produseCurente[k].ascuns; });
+        ascunse.sort(function (a, b) {
+            var na = (produseCurente[a].nume || '').toLowerCase();
+            var nb = (produseCurente[b].nume || '').toLowerCase();
+            return na < nb ? -1 : na > nb ? 1 : 0;
+        });
+
+        // Auto-assign missing order values to visible items
+        var anyMissing = vizibile.some(function (k) { return produseCurente[k].order === undefined; });
         if (anyMissing) {
             var updates = {};
-            keys.forEach(function (k, i) {
+            vizibile.forEach(function (k, i) {
                 produseCurente[k].order = i;
                 updates['bars/' + barCurent + '/' + categorieCurenta + '/' + k + '/order'] = i;
             });
             db.ref().update(updates);
         }
 
-        var vizibile = keys.filter(function (k) { return !produseCurente[k].ascuns; });
-        var ascunse  = keys.filter(function (k) { return  produseCurente[k].ascuns; });
-
         listaActiva.innerHTML = vizibile.length
-            ? vizibile.map(cardHtml).join('')
+            ? vizibile.map(function (k) { return cardHtml(k, false); }).join('')
             : '<div class="spinner">Nu există produse active.</div>';
 
         if (ascunse.length > 0) {
-            listaAscunse.innerHTML = ascunse.map(cardHtml).join('');
+            listaAscunse.innerHTML = ascunse.map(function (k) { return cardHtml(k, true); }).join('');
             sectiuneAscunse.style.display = 'block';
         } else {
             listaAscunse.innerHTML = '';
@@ -597,7 +691,23 @@
         initSortable();
     }
 
-    function cardHtml(key) {
+    // ── Renumber all active items consecutively ──
+    function renumberActive() {
+        var cards = listaActiva.querySelectorAll('.produs-admin');
+        var updates = {};
+        for (var i = 0; i < cards.length; i++) {
+            var k = cards[i].dataset.key;
+            if (k) {
+                produseCurente[k].order = i;
+                updates['bars/' + barCurent + '/' + categorieCurenta + '/' + k + '/order'] = i;
+                var badge = cards[i].querySelector('.nr-meniu');
+                if (badge) badge.textContent = i + 1;
+            }
+        }
+        if (Object.keys(updates).length > 0) db.ref().update(updates);
+    }
+
+    function cardHtml(key, isHidden) {
         var p = produseCurente[key];
         var pretStr = p.pret !== undefined
             ? (isNaN(p.pret) ? String(p.pret).toUpperCase() : p.pret + ' LEI')
@@ -608,9 +718,12 @@
             pretStr
         ].filter(Boolean).join(' · ');
 
+        var nrText = isHidden ? '' : (Number(p.order) + 1);
+
         return '<div class="produs-admin' + (p.soldOut ? ' e-sold-out' : '') + '" data-key="' + key + '">' +
             '<span class="drag-handle">⠿⠿</span>' +
             '<div class="produs-admin-body">' +
+            '<span class="nr-meniu">' + nrText + '</span>' +
             '<div class="produs-admin-info">' +
             '<div class="produs-admin-nume">' + (p.nume || '') + '</div>' +
             (detalii ? '<div class="produs-admin-detalii">' + detalii + '</div>' : '') +
@@ -625,6 +738,45 @@
             '</div>';
     }
 
+    // ── Search filter ──
+    function filterProduse(query) {
+        var q = query.trim().toLowerCase();
+        searchQuery = q;
+
+        var activeCards = listaActiva.querySelectorAll('.produs-admin');
+        var hiddenCards = listaAscunse.querySelectorAll('.produs-admin');
+        var hasResults = false;
+        var hiddenHasResults = false;
+
+        activeCards.forEach(function (card) {
+            var key = card.dataset.key;
+            var name = (produseCurente[key] ? (produseCurente[key].nume || '') : '').toLowerCase();
+            var show = !q || name.indexOf(q) !== -1;
+            card.style.display = show ? '' : 'none';
+            if (show) hasResults = true;
+        });
+
+        hiddenCards.forEach(function (card) {
+            var key = card.dataset.key;
+            var name = (produseCurente[key] ? (produseCurente[key].nume || '') : '').toLowerCase();
+            var show = !q || name.indexOf(q) !== -1;
+            card.style.display = show ? '' : 'none';
+            if (show) { hasResults = true; hiddenHasResults = true; }
+        });
+
+        searchGol.style.display = (q && !hasResults) ? 'block' : 'none';
+
+        if (q) {
+            sectiuneAscunse.style.display = hiddenHasResults ? 'block' : 'none';
+        } else {
+            sectiuneAscunse.style.display = listaAscunse.querySelector('.produs-admin') ? 'block' : 'none';
+        }
+
+        if (sortableInstance) {
+            sortableInstance.option('disabled', !!q);
+        }
+    }
+
     // ── Sortable ──
     function initSortable() {
         if (typeof Sortable === 'undefined') return;
@@ -633,18 +785,7 @@
             handle: '.drag-handle',
             animation: 150,
             ghostClass: 'drag-ghost',
-            onEnd: function () {
-                var cards = listaActiva.querySelectorAll('.produs-admin');
-                var updates = {};
-                for (var i = 0; i < cards.length; i++) {
-                    var k = cards[i].dataset.key;
-                    if (k) {
-                        produseCurente[k].order = i;
-                        updates['bars/' + barCurent + '/' + categorieCurenta + '/' + k + '/order'] = i;
-                    }
-                }
-                db.ref().update(updates);
-            }
+            onEnd: function () { renumberActive(); }
         });
     }
 
@@ -676,12 +817,31 @@
         }
 
         if (val) {
-            listaAscunse.appendChild(card);
+            // Hiding: clear badge and insert alphabetically into hidden section
+            var badge = card.querySelector('.nr-meniu');
+            if (badge) badge.textContent = '';
+
+            var myName = (produseCurente[key].nume || '').toLowerCase();
+            var hiddenCards = listaAscunse.querySelectorAll('.produs-admin');
+            var insertedAlpha = false;
+            for (var j = 0; j < hiddenCards.length; j++) {
+                var hKey = hiddenCards[j].dataset.key;
+                var hName = (hKey && produseCurente[hKey] ? (produseCurente[hKey].nume || '') : '').toLowerCase();
+                if (myName < hName) {
+                    listaAscunse.insertBefore(card, hiddenCards[j]);
+                    insertedAlpha = true;
+                    break;
+                }
+            }
+            if (!insertedAlpha) listaAscunse.appendChild(card);
+
             sectiuneAscunse.style.display = 'block';
             if (!listaActiva.querySelector('.produs-admin')) {
                 listaActiva.innerHTML = '<div class="spinner">Nu există produse active.</div>';
             }
+            renumberActive();
         } else {
+            // Revealing: insert by stored order, then renumber everything
             var emptyMsg = listaActiva.querySelector('.spinner');
             if (emptyMsg) emptyMsg.remove();
 
@@ -692,7 +852,7 @@
                 var k = activeCards[i].dataset.key;
                 var theirOrder = (k && produseCurente[k] && produseCurente[k].order !== undefined)
                     ? Number(produseCurente[k].order) : 9999;
-                if (myOrder < theirOrder) {
+                if (myOrder <= theirOrder) {
                     listaActiva.insertBefore(card, activeCards[i]);
                     inserted = true;
                     break;
@@ -703,6 +863,7 @@
             if (!listaAscunse.querySelector('.produs-admin')) {
                 sectiuneAscunse.style.display = 'none';
             }
+            renumberActive();
         }
     }
 
@@ -729,7 +890,13 @@
     function buildForm(date) {
         var campuri = barConfig[barCurent].categorii[categorieCurenta].campuri;
         var multiline = { ingrediente: true, alergii: true };
-        formCampuri.innerHTML = campuri.map(function (camp) {
+
+        var currentNr = date.order !== undefined ? Number(date.order) + 1 : '';
+        var nrField = '<div class="form-field"><label>NUMĂR PE MENIU</label>' +
+            '<input type="number" id="camp-nr-meniu" value="' + currentNr + '" ' +
+            'placeholder="Lasă gol — adaugă la final" min="1" step="1"></div>';
+
+        formCampuri.innerHTML = nrField + campuri.map(function (camp) {
             var val = date[camp] !== undefined ? date[camp] : '';
             var lbl = '<div class="form-field"><label>' + (campLabels[camp] || camp).toUpperCase() + '</label>';
             if (multiline[camp]) {
@@ -748,10 +915,10 @@
         var campuri = barConfig[barCurent].categorii[categorieCurenta].campuri;
         var produs = {};
 
+        // Preserve metadata on edit
         if (editKey && produseCurente[editKey]) {
             if (produseCurente[editKey].soldOut) produs.soldOut = true;
             if (produseCurente[editKey].ascuns)  produs.ascuns  = true;
-            if (produseCurente[editKey].order !== undefined) produs.order = produseCurente[editKey].order;
         }
 
         campuri.forEach(function (camp) {
@@ -761,19 +928,92 @@
             produs[camp] = camp === 'alcool' ? (val !== '' ? parseFloat(val) || 0 : 0) : val;
         });
 
+        // Read requested position (1-based, user-facing)
+        var nrEl = document.getElementById('camp-nr-meniu');
+        var nrRaw = nrEl ? parseInt(nrEl.value.trim(), 10) : NaN;
+
         var path = 'bars/' + barCurent + '/' + categorieCurenta;
+
+        // Visible items sorted by current order
+        var visibleKeys = Object.keys(produseCurente)
+            .filter(function (k) { return !produseCurente[k].ascuns; });
+        visibleKeys.sort(function (a, b) {
+            return (Number(produseCurente[a].order) || 0) - (Number(produseCurente[b].order) || 0);
+        });
+
+        var updates = {};
         var promise;
+
         if (editKey) {
-            promise = db.ref(path + '/' + editKey).set(produs);
-        } else {
-            var maxOrder = -1;
-            Object.keys(produseCurente).forEach(function (k) {
-                if (produseCurente[k].order !== undefined && Number(produseCurente[k].order) > maxOrder) {
-                    maxOrder = Number(produseCurente[k].order);
+            var isHiddenItem = !!produseCurente[editKey].ascuns;
+            var oldOrder = produseCurente[editKey].order !== undefined
+                ? Number(produseCurente[editKey].order) : 9999;
+            var maxPos = isHiddenItem ? visibleKeys.length + 1 : visibleKeys.length;
+
+            var newOrder;
+            if (!isNaN(nrRaw) && nrRaw >= 1 && nrRaw <= maxPos) {
+                newOrder = nrRaw - 1;
+            } else {
+                newOrder = oldOrder;
+            }
+            produs.order = newOrder;
+
+            // If visible item moved to a different position, shift neighbours
+            if (!isHiddenItem && newOrder !== oldOrder) {
+                var otherKeys = visibleKeys.filter(function (k) { return k !== editKey; });
+                if (newOrder < oldOrder) {
+                    otherKeys.forEach(function (k) {
+                        var o = Number(produseCurente[k].order);
+                        if (o >= newOrder && o < oldOrder) {
+                            produseCurente[k].order = o + 1;
+                            updates[path + '/' + k + '/order'] = o + 1;
+                        }
+                    });
+                } else {
+                    otherKeys.forEach(function (k) {
+                        var o = Number(produseCurente[k].order);
+                        if (o > oldOrder && o <= newOrder) {
+                            produseCurente[k].order = o - 1;
+                            updates[path + '/' + k + '/order'] = o - 1;
+                        }
+                    });
                 }
+            }
+
+            updates[path + '/' + editKey] = produs;
+            promise = db.ref().update(updates);
+
+        } else {
+            // New product — find max order among visible items
+            var maxOrderVal = -1;
+            visibleKeys.forEach(function (k) {
+                var o = Number(produseCurente[k].order);
+                if (o > maxOrderVal) maxOrderVal = o;
             });
-            produs.order = maxOrder + 1;
-            promise = db.ref(path).push(produs);
+
+            var targetOrder;
+            if (!isNaN(nrRaw) && nrRaw >= 1 && nrRaw <= visibleKeys.length + 1) {
+                targetOrder = nrRaw - 1;
+            } else {
+                targetOrder = maxOrderVal + 1; // append at end
+            }
+            produs.order = targetOrder;
+
+            // Shift items at >= targetOrder up by 1
+            if (targetOrder <= maxOrderVal) {
+                visibleKeys.forEach(function (k) {
+                    var o = Number(produseCurente[k].order);
+                    if (o >= targetOrder) {
+                        produseCurente[k].order = o + 1;
+                        updates[path + '/' + k + '/order'] = o + 1;
+                    }
+                });
+            }
+
+            var shiftPromise = Object.keys(updates).length > 0
+                ? db.ref().update(updates)
+                : Promise.resolve();
+            promise = shiftPromise.then(function () { return db.ref(path).push(produs); });
         }
 
         promise.then(function () {
